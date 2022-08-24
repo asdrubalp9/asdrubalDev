@@ -1,0 +1,16 @@
+// app global css in SCSS form
+$color: #b6b2bf;
+$primaryColor: #ea4343;
+$main-background-color: #3c3c3c;
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+:root {
+    --primaryColor: $primaryColor;
+}
+.primary-font {
+    font-family: 'Josefin Sans', sans-serif;
+}
+body { 
+    background: $main-background-color;
+    font-family: 'Open Sans', sans-serif;
+}
