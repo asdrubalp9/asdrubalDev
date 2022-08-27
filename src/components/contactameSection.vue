@@ -1,7 +1,11 @@
 <template>
-  <div class="row flex justify-center" style="height: 92vh" id="contactame">
+  <div
+    class="row bg-darker flex justify-center q-pa-xl"
+    style="height: 92vh"
+    id="contactame"
+  >
     <div class="col-8">
-      <div class="row">
+      <div class="row justify-around">
         <div class="col-12">
           <p class="text-center text-primary text-h5 q-ma-none">Contáctame</p>
           <p
@@ -10,7 +14,26 @@
             Escribeme con confianza
           </p>
         </div>
-        <div class="col-12">
+        <div class="col-5">
+          <p>
+            Por favor, llena el formulario en esta sección y te responderé a la
+            brevedad posible
+          </p>
+          <div class="row">
+            <div class="col-2 flex flex-center">
+              <q-icon name="fa-solid fa-envelope" size="xl" />
+            </div>
+            <div class="col">
+              <p class="text-white font-weight-bold q-ma-none">Correo</p>
+              <p
+                class="text-white primary-text text-h4 q-ma-none primary-color"
+              >
+                asdrubaldev@gmail.com
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
           <q-form ref="contactForm">
             <form-field-generator :fields="form" />
             <q-btn
@@ -18,7 +41,7 @@
               icon-right="fa-solid fa-paper-plane"
               label="Enviar mensaje"
               unelevated
-              class="full-width"
+              class="full-width q-mt-lg q-pa-md"
             />
           </q-form>
         </div>
@@ -92,5 +115,10 @@ export default {
   line-height: 2em;
   font-size: 2em;
   font-weight: bolder;
+}
+.q-field [role="alert"] {
+  font-size: 13px !important;
+  font-weight: bold;
+  color: #ed3333;
 }
 </style>
