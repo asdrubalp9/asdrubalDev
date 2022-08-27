@@ -79,7 +79,6 @@ export default {
   setup() {
     const refSkills = ref(null);
     const skills = ["Desarrollador Creativo", "Cloud architect", "SEO"];
-    // loop on skills array and add the class flipInY and then remove it after 1s and add the class flipOutY
 
     // function takeNext(palabra) {
     //   return !(
