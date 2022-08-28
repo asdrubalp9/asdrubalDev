@@ -16,9 +16,9 @@
           @click="toggleLeftDrawer"
         />
         -->
-
       <q-toolbar-title
-        class="primary-text text-h2 q-pt-md q-ml-xl text-weight-bold"
+        class="primary-text text-h2 q-pt-md q-ml-xl text-weight-bold toolbarTitle"
+        :class="toolbarTitleClass"
       >
         Drú
       </q-toolbar-title>
@@ -50,7 +50,7 @@
           :class="menu.class"
           :style="menu.style"
           :key="k"
-          @click="lang.toggleLang()"
+          @click="toggleLang()"
         />
         <q-btn
           v-if="['download'].includes(menu.type)"
@@ -72,20 +72,23 @@
 </template>
 
 <script>
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { useLanguageStore } from "stores/language";
+import { useI18n } from "vue-i18n";
 
 export default {
   name: "HeaderComponent",
   setup() {
+    const { locale } = useI18n({ useScope: "global" });
+    const { t } = useI18n();
     const lang = useLanguageStore();
     const refHead = ref(null);
     const elevated = ref(false);
     const toolbarClass = ref("");
+    const toolbarTitleClass = ref("hidden");
     // detect when is scrolling down to change the class of the header
     onMounted(() => {
       window.addEventListener("scroll", () => {
-        const topHeader = document.querySelector("#topHeader");
         if (window.scrollY > 50) {
           elevated.value = true;
           toolbarClass.value = "bg-dark";
@@ -93,36 +96,43 @@ export default {
           elevated.value = false;
           toolbarClass.value = "";
         }
+        if (window.scrollY > 200) {
+          toolbarTitleClass.value = "flipInX animate__animated";
+        } else {
+          toolbarTitleClass.value = "hidden";
+        }
       });
     });
-
+    function toggleLang() {
+      locale.value = locale.value === "en-US" ? "es" : "en-US";
+    }
     const topNavMenu = ref([
       {
-        label: "Sobre Drú",
+        label: computed(() => t("headAbout")),
         type: "link",
         // icon: "list",
         scrollTo: "#dru",
       },
       {
-        label: "Portafolio",
+        label: computed(() => t("headPortfolio")),
         type: "link",
         // icon: "list",
         scrollTo: "#portafolio",
       },
       {
-        label: "Mis Servicios",
+        label: computed(() => t("headServices")),
         type: "link",
         // icon: "list",
         scrollTo: "#servicios",
       },
       {
-        label: "Contáctame",
+        label: computed(() => t("headContact")),
         type: "link",
         // icon: "list",
         scrollTo: "#contactame",
       },
       {
-        label: "Descargar CV",
+        label: computed(() => t("headDownloadCV")),
         type: "download",
         iconRight: "fa-solid fa-cloud-arrow-down",
         outline: true,
@@ -131,7 +141,7 @@ export default {
         style: "border: 4px solid #ea4747",
       },
       {
-        label: "ES",
+        label: computed(() => (locale.value === "en-US" ? "ES" : "US")),
         type: "action",
         class: "bg-white text-primary text-weight-bold",
         style: "border: 4px solid #ea4747",
@@ -150,6 +160,9 @@ export default {
       topNavMenu,
       scrollPageTo,
       lang,
+      toggleLang,
+      locale,
+      toolbarTitleClass,
     };
   },
 };

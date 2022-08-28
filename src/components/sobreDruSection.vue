@@ -99,8 +99,6 @@ export default {
   margin-right: -145px;
   z-index: 2;
 }
-.imagesHolder .rectangulo img {
-}
 .imagesHolder .rectangulo {
   position: absolute;
   overflow: hidden;
