@@ -22,8 +22,12 @@
           <Tilt :parallax="true" :options="options">
             <q-card dark class="q-pa-md" style="transform: translateZ(20px)">
               <div class="row">
-                <div class="col flex flex-center">
-                  <q-icon :name="serv.icon" size="xl" />
+                <div
+                  class="col relative service_icon"
+                  style="position: relative"
+                >
+                  <q-icon class="absolute-center" :name="serv.icon" size="xl" />
+                  <img src="/imgs/service.png" class="absolute-center" />
                 </div>
                 <div class="col-9">
                   <h2 class="text-h4 text-white q-mb-sm q-mt-md">
@@ -128,5 +132,12 @@ export default {
   line-height: 2em;
   font-size: 2em;
   font-weight: bolder;
+}
+.service_icon i {
+  z-index: 5;
+}
+.service_icon img {
+  opacity: 0.5;
+  z-index: 1;
 }
 </style>
