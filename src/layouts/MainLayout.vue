@@ -13,14 +13,12 @@
 </template>
 
 <script>
-import { defineComponent, ref } from "vue";
+import { defineComponent, onMounted, ref } from "vue";
 import HeaderComponent from "../components/headerComponent.vue";
-
 export default defineComponent({
   name: "MainLayout",
   setup() {
     const leftDrawerOpen = ref(false);
-
     return {
       leftDrawerOpen,
       toggleLeftDrawer() {

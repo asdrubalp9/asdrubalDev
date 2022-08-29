@@ -41,6 +41,11 @@
         habilidades y el conocimiento necesario para ayudarte a triunfar con tu
         proyecto.
       </p>
+      <p>
+        Llevamos tu visión de idea a realidad brindando las mejores soluciones
+        tecnológicas para nuestros clientes y tu negocio. Estamos aquí para
+        ayudarlo a llevar su idea del concepto a una base sólida.
+      </p>
       <q-btn
         color="primary"
         rounded

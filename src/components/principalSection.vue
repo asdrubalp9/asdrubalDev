@@ -69,14 +69,17 @@
         </div>
       </div>
     </div>
-    <div class="col-5 text-right self-end">
-      <img src="imgs/dru.png" />
+    <div class="col-5 full-height">
+      <div class="parallaxWrapper full-height">
+        <img src="imgs/dru.png" />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import { onMounted, ref } from "vue";
+import { jarallax } from "jarallax";
 
 export default {
   setup() {
@@ -128,27 +131,6 @@ export default {
       }, 2500);
     }
 
-    function showLetter($letter, $word, $bool, $duration) {
-      $letter.classList.add("in").removeClass("out");
-
-      if (!$letter.is(":last-child")) {
-        setTimeout(function () {
-          showLetter($letter.next(), $word, $bool, $duration);
-        }, $duration);
-      } else {
-        if ($word.parents(".cd-headline").classList.contains("type")) {
-          setTimeout(function () {
-            $word.parents(".cd-words-wrapper").classList.add("waiting");
-          }, 200);
-        }
-        if (!$bool) {
-          setTimeout(function () {
-            hideWord($word);
-          }, animationDelay);
-        }
-      }
-    }
-
     function takeNext(palabra) {
       return !(
         palabra.parentElement.children[
@@ -157,12 +139,6 @@ export default {
       )
         ? palabra.nextElementSibling
         : palabra.parentElement.children[0];
-    }
-
-    function takePrev($word) {
-      return !$word.is(":first-child")
-        ? $word.prev()
-        : $word.parent().children().last();
     }
 
     function switchWord(oldWord, newWord) {
@@ -174,6 +150,13 @@ export default {
 
     onMounted(() => {
       animateHeadline(document.querySelectorAll(".skillzHolder"));
+      jarallax(document.querySelectorAll(".parallaxWrapper"), {
+        speed: 0.5,
+        relativeInput: true,
+        onInit: function () {
+          console.log("ready!");
+        },
+      });
     });
     return {
       skills,
