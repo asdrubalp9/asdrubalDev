@@ -19,7 +19,7 @@
         />
       </a>
     </div>
-    <div class="col-6 full-height flex justify-between column q-py-xl">
+    <div class="col-6 full-height flex justify-around column q-py-xl">
       <h1 class="hero-text text-h4">
         Hola, Soy
         <span class="primary-text"> Drú</span>
@@ -27,7 +27,7 @@
           <span class="cd-words-wrapper">
             <b
               ref="refSkills"
-              class="q-ma-none refSkills absolute text-h2"
+              class="q-ma-none refSkills absolute text-h2 primary-text text-h1"
               v-for="(skill, k) in skills"
               :key="k"
               :class="k === 0 ? 'is-visible' : ''"
@@ -81,7 +81,7 @@ import { onMounted, ref } from "vue";
 export default {
   setup() {
     const refSkills = ref(null);
-    const skills = ["Desarrollador Creativo", "Cloud architect", "SEO"];
+    const skills = ["Desarrollador Creativo", "Cloud architect", "Asesor SEO"];
     var animationDelay = 2500,
       //loading bar effect
       barAnimationDelay = 3800,
@@ -90,7 +90,6 @@ export default {
 
     function animateHeadline(headlines) {
       var duration = animationDelay;
-      console.log("headlines", headlines);
       headlines.forEach(function (headline) {
         if (headline.classList.contains("loading-bar")) {
           duration = barAnimationDelay;
