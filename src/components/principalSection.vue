@@ -23,15 +23,18 @@
       <h1 class="hero-text text-h4">
         Hola, Soy
         <span class="primary-text"> Drú</span>
-        <div class="skillzHolder">
-          <p
-            ref="refSkills"
-            class="skillz q-ma-none inline"
-            v-for="(skill, k) in skills"
-            :key="k"
-          >
-            {{ skill }}
-          </p>
+        <div class="skillzHolder rotate-1">
+          <span class="cd-words-wrapper">
+            <b
+              ref="refSkills"
+              class="q-ma-none refSkills absolute text-h2"
+              v-for="(skill, k) in skills"
+              :key="k"
+              :class="k === 0 ? 'is-visible' : ''"
+            >
+              {{ skill }}
+            </b>
+          </span>
         </div>
       </h1>
       <div class="row">
@@ -79,37 +82,99 @@ export default {
   setup() {
     const refSkills = ref(null);
     const skills = ["Desarrollador Creativo", "Cloud architect", "SEO"];
+    var animationDelay = 2500,
+      //loading bar effect
+      barAnimationDelay = 3800,
+      barWaiting = barAnimationDelay - 3000; //3000 is the duration of the transition on the loading bar - set in the scss/css file
+    //letters effect
 
-    // function takeNext(palabra) {
-    //   return !(
-    //     palabra.parentElement.children[
-    //       palabra.parentElement.children.length - 1
-    //     ].innerText === palabra.innerText
-    //   )
-    //     ? palabra.nextElementSibling
-    //     : palabra.parentElement.children[0];
-    // }
-    // function hideWord(word) {
-    //   var nextWord = takeNext(word);
-    //   switchWord(word, nextWord);
-    //   setTimeout(function () {
-    //     hideWord(nextWord);
-    //   }, 2500);
-    // }
-    // function switchWord(oldWord, newWord) {
-    //   oldWord.classList.remove("visible");
-    //   oldWord.classList.add("is-hidden");
-    //   newWord.classList.remove("is-hidden");
-    //   newWord.classList.add("visible");
-    // }
-    // function switchSkills(skills) {
-    //   skills.forEach((e, k) => {
-    //     hideWord(e);
-    //   });
-    // }
+    function animateHeadline(headlines) {
+      var duration = animationDelay;
+      console.log("headlines", headlines);
+      headlines.forEach(function (headline) {
+        if (headline.classList.contains("loading-bar")) {
+          duration = barAnimationDelay;
+          setTimeout(function () {
+            headline
+              .querySelector(".cd-words-wrapper")
+              .classList.add("is-loading");
+          }, barWaiting);
+        } else if (headline.classList.contains("clip")) {
+          var spanWrapper = headline.querySelector(".cd-words-wrapper"),
+            newWidth = spanWrapper.width() + 10;
+          spanWrapper.css("width", newWidth);
+        } else if (!headline.classList.contains("type")) {
+          //assign to .cd-words-wrapper the width of its longest word
+          var words = headline.querySelectorAll(".cd-words-wrapper b");
+
+          const width = 0;
+          words.forEach(function (e) {
+            var wordWidth = e.innerWidth;
+            if (wordWidth > width) width = wordWidth;
+          });
+          headline.querySelector(".cd-words-wrapper").style.width = width;
+        }
+
+        //trigger animation
+        setTimeout(function () {
+          hideWord(headline.querySelector(".is-visible"));
+        }, duration);
+      });
+    }
+    function hideWord(word) {
+      var nextWord = takeNext(word);
+      switchWord(word, nextWord);
+      setTimeout(function () {
+        hideWord(nextWord);
+      }, 2500);
+    }
+
+    function showLetter($letter, $word, $bool, $duration) {
+      $letter.classList.add("in").removeClass("out");
+
+      if (!$letter.is(":last-child")) {
+        setTimeout(function () {
+          showLetter($letter.next(), $word, $bool, $duration);
+        }, $duration);
+      } else {
+        if ($word.parents(".cd-headline").classList.contains("type")) {
+          setTimeout(function () {
+            $word.parents(".cd-words-wrapper").classList.add("waiting");
+          }, 200);
+        }
+        if (!$bool) {
+          setTimeout(function () {
+            hideWord($word);
+          }, animationDelay);
+        }
+      }
+    }
+
+    function takeNext(palabra) {
+      return !(
+        palabra.parentElement.children[
+          palabra.parentElement.children.length - 1
+        ].innerText === palabra.innerText
+      )
+        ? palabra.nextElementSibling
+        : palabra.parentElement.children[0];
+    }
+
+    function takePrev($word) {
+      return !$word.is(":first-child")
+        ? $word.prev()
+        : $word.parent().children().last();
+    }
+
+    function switchWord(oldWord, newWord) {
+      oldWord.classList.remove("is-visible");
+      oldWord.classList.add("is-hidden");
+      newWord.classList.remove("is-hidden");
+      newWord.classList.add("is-visible");
+    }
+
     onMounted(() => {
-      // animateMovingElement(".moveMe");
-      //switchSkills(refSkills.value);
+      animateHeadline(document.querySelectorAll(".skillzHolder"));
     });
     return {
       skills,

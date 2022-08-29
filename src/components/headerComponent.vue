@@ -97,7 +97,7 @@ export default {
           toolbarClass.value = "";
         }
         if (window.scrollY > 200) {
-          toolbarTitleClass.value = "flipInX animate__animated";
+          toolbarTitleClass.value = "flipInX animated";
         } else {
           toolbarTitleClass.value = "hidden";
         }
