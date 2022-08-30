@@ -29,7 +29,7 @@
           Asdrúbal Pérez
           <br />
         </span>
-        <span class="text-white text-h3"> Desarrollador Creativo </span>
+        <span class="text-white text-h3"> {{ t("creativeDeveloper") }} </span>
       </h2>
       <p class="text-white text-h4 q-ma-none q-mb-md">
         {{ t("in") }} Santiago de Chile

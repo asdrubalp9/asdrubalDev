@@ -38,4 +38,15 @@ export default {
   obligatoryField: "This field is obligatory",
   fieldTooLong: "The field is too long",
   sendMessage: "Send message",
+  service1Title: "Software development",
+  service1Desc:
+    "I'm a highly experienced Software developer and I'll make your idea into successful project I have experience in managing a team of developers and designers. I love to work with people and inspire them to do their best work.",
+  service2Title: "Cloud architect",
+  service2Desc:
+    "As a cloud architect I can help you with your cloud strategy to make your online service highly accessible, flexible and scalable. I will evaluate your current infrastructure and propose a road map for a cloud migration that meets your business requirements.",
+  service3Title: "SEO Advisor",
+  service3Desc:
+    "I can help you increase visits to your website with my SEO services. I could advice you  or build your website with SEO in mind so that it ranks higher on search engines like Google, Bing and Yahoo!",
+  service4Title: "Cloud architect",
+  service5Desc: "",
 };

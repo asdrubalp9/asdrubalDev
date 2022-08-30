@@ -24,7 +24,11 @@
                   class="col relative service_icon"
                   style="position: relative"
                 >
-                  <q-icon class="absolute-center" :name="serv.icon" size="xl" />
+                  <q-icon
+                    class="absolute-center"
+                    :name="serv.icon"
+                    style="font-size: 65px"
+                  />
                   <img src="/imgs/service.png" class="absolute-center" />
                 </div>
                 <div class="col-9">
@@ -125,33 +129,29 @@ export default {
     };
     const servicios = ref([
       {
-        nombre: "sacarme los mocos",
+        nombre: computed(() => t("service1Title")),
+        descripcion: computed(() => t("service1Desc")),
         tilt: true,
-        descripcion:
-          "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit architecto reprehenderit numquam vitae illum. Laborum excepturi consectetur ad quas enim esse perferendis.",
         icon: "fa-solid fa-laptop-file",
       },
       {
-        nombre: "sacarme los mocos",
+        nombre: computed(() => t("service2Title")),
+        descripcion: computed(() => t("service2Desc")),
         tilt: true,
-        descripcion:
-          "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit architecto reprehenderit numquam vitae illum. Laborum excepturi consectetur ad quas enim esse perferendis.",
-        icon: "fa-solid fa-laptop-file",
+        icon: "fa-brands fa-searchengin",
       },
       {
-        nombre: "sacarme los mocos",
+        nombre: computed(() => t("service3Title")),
+        descripcion: computed(() => t("service3Desc")),
         tilt: true,
-        descripcion:
-          "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit architecto reprehenderit numquam vitae illum. Laborum excepturi consectetur ad quas enim esse perferendis.",
-        icon: "fa-solid fa-laptop-file",
+        icon: "fa-brands fa-aws",
       },
-      {
-        nombre: "sacarme los mocos",
-        tilt: true,
-        descripcion:
-          "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit architecto reprehenderit numquam vitae illum. Laborum excepturi consectetur ad quas enim esse perferendis.",
-        icon: "fa-solid fa-laptop-file",
-      },
+      // {
+      //   nombre: computed(() => t("service4Title")),
+      //   descripcion: computed(() => t("service4Desc")),
+      //   tilt: true,
+      //   icon: "fa-solid fa-laptop-file",
+      // },
     ]);
     return { servicios, options, options2, t };
   },
@@ -173,7 +173,7 @@ export default {
   z-index: 5;
 }
 .service_icon img {
-  opacity: 0.5;
+  opacity: 0.3;
   z-index: 1;
 }
 </style>

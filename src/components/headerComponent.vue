@@ -112,12 +112,14 @@ export default {
         // icon: "list",
         scrollTo: "#dru",
       },
+      /*
       {
         label: computed(() => t("headPortfolio")),
         type: "link",
         // icon: "list",
         scrollTo: "#portafolio",
       },
+      //*/
       {
         label: computed(() => t("headServices")),
         type: "link",

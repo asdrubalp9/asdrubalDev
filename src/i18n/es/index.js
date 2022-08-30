@@ -38,4 +38,15 @@ export default {
   obligatoryField: "Este campo es obligatorio",
   fieldTooLong: "El campo es muy largo",
   sendMessage: "Enviar mensaje",
+  service1Title: "Desarrollo de software",
+  service1Desc:
+    "Soy un desarrollador de software con mucha experiencia y convertiré tu idea en un proyecto exitoso. Tengo experiencia en la gestión de un equipo de desarrolladores y diseñadores. Me encanta trabajar con la gente e inspirarlos a hacer su mejor trabajo.",
+  service2Title: "Cloud architect",
+  service2Desc:
+    "Como arquitecto de nube, puedo ayudarlo con su estrategia de nube para que su servicio en línea sea altamente accesible, flexible y escalable. Evaluaré su infraestructura actual y propondré una hoja de ruta para una migración a la nube que cumpla con los requisitos de su negocio.",
+  service3Title: "ASESOR SEO",
+  service3Desc:
+    "Puedo ayudarte a aumentar las visitas a tu sitio web con mis servicios de SEO. ¡Podría aconsejarle o construir su sitio web con SEO en mente para que se clasifique más alto en los motores de búsqueda como Google, Bing y Yahoo!",
+  service4Title: "Cloud architect",
+  service4Desc: "",
 };

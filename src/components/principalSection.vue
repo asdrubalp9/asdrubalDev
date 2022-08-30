@@ -1,16 +1,18 @@
 <template>
   <div class="row flex flex-center" style="height: 92vh" id="home">
     <div class="col-1 column flex">
-      <q-icon
-        name="fa-brands fa-twitter"
-        class="text-white q-ma-sm"
-        size="md"
-      />
-      <q-icon
-        name="fa-brands fa-facebook"
-        class="text-white q-ma-sm"
-        size="md"
-      />
+      <!--
+        <q-icon
+          name="fa-brands fa-twitter"
+          class="text-white q-ma-sm"
+          size="md"
+        />
+        <q-icon
+          name="fa-brands fa-facebook"
+          class="text-white q-ma-sm"
+          size="md"
+        />
+      -->
       <a href="https://www.linkedin.com/in/asdrubalp09/">
         <q-icon
           name="fa-brands fa-linkedin"
@@ -23,12 +25,25 @@
       <h1 class="hero-text text-h4">
         {{ t("homeTitle") }}
         <span class="primary-text"> Drú</span>
-        <div class="skillzHolder rotate-1">
+        <div class="skillzHolder rotate-1" v-show="locale === 'es'">
           <span class="cd-words-wrapper">
             <b
               ref="refSkills"
               class="q-ma-none refSkills absolute text-h2 primary-text text-h1"
               v-for="(skill, k) in skills"
+              :key="k"
+              :class="k === 0 ? 'is-visible' : ''"
+            >
+              {{ skill }}
+            </b>
+          </span>
+        </div>
+        <div class="skillzHolder rotate-1" v-show="locale === 'en-US'">
+          <span class="cd-words-wrapper">
+            <b
+              ref="refSkills"
+              class="q-ma-none refSkills absolute text-h2 primary-text text-h1"
+              v-for="(skill, k) in skillsEN"
               :key="k"
               :class="k === 0 ? 'is-visible' : ''"
             >
@@ -79,20 +94,24 @@
 
 <script>
 import { computed, onMounted, ref } from "vue";
+
 import { jarallax } from "jarallax";
 import { useI18n } from "vue-i18n";
 export default {
   setup() {
+    const { locale } = useI18n({ useScope: "global" });
     const { t } = useI18n();
     const refSkills = ref(null);
-    const creativeDeveloper = computed(() => t("creativeDeveloper"));
-    const cloudArchitect = computed(() => t("cloudArchiteq"));
-    const headlineSEO = computed(() => t("creativeDeveloper"));
     // const skills = ref([creativeDeveloper, cloudArchitect, headlineSEO]);
     const skills = ref([
       "Desarrollador creativo",
-      "Cloud arquitect",
-      "asesor seo",
+      "Arquitecto de cloud",
+      "Asesor SEO",
+    ]);
+    const skillsEN = ref([
+      "Creative developer",
+      "Cloud architect",
+      "SEO consultant",
     ]);
     var animationDelay = 2500,
       //loading bar effect
@@ -171,6 +190,8 @@ export default {
       skills,
       refSkills,
       t,
+      locale,
+      skillsEN,
     };
   },
 };
