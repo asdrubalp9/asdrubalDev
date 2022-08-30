@@ -1,5 +1,5 @@
 <template>
-  <div :class="parallax ? 'preserve' : ''" id="tiltMe" ref="tiltRef">
+  <div :class="parallax ? 'preserve' : ''" class="tiltMe">
     <slot></slot>
   </div>
 </template>
@@ -12,7 +12,7 @@ export default {
   setup(props) {
     const tiltRef = ref(null);
     onMounted(() => {
-      VanillaTilt.init(tiltRef, props.options);
+      VanillaTilt.init(document.querySelectorAll(".tiltMe"), props.options);
     });
     return {
       tiltRef,

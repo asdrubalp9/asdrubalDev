@@ -8,4 +8,34 @@ export default {
   headServices: "My services",
   headContact: "Contact me",
   headDownloadCV: "Download my CV",
+  downloadCvLink: "1Oa6G7sIHAI3wHaNDYWYt02WhSXd-5vNwGk3zRXCJu-o",
+  creativeDeveloper: "Creative developer",
+  cloudArchiteq: "Cloud architect",
+  headlineSEO: "Asesor SEO for companies and startups",
+  contactMe: "Contact me",
+  homeTitle: "Hi, I'm",
+  aboutMe: "About me",
+  i: "I'm",
+  in: "in",
+  aboutMeText1:
+    "Hello! My name is Hasdrubal. I am a software developer very passionate and dedicated to my work.",
+  aboutMeText2:
+    "With almost 10 years of experience as a developer I have acquired the necessary skills and knowledge to help you succeed with your project.",
+  aboutMeText3:
+    "We take your vision from idea to reality by providing the best technological solutions for our clients and your business. We are here to help you take your idea from concept to solid foundation.",
+  whatICanDoForyou: "What I can do for you",
+  servicesContent:
+    "We offer high quality services at competitive prices. Our main objective is customer satisfaction, which we obtain through the market orientation of the service and continuous support.",
+  servicesContent2: "Do you need something different?",
+  writeToMe: "Contact me with confidence",
+  contactMeContent:
+    "Please fill out the form in this section and I will reply as soon as possible.",
+  email: "E-mail",
+  yourName: "Your name",
+  yourEmail: "Your email",
+  yourPhone: "Your phone",
+  yourMessage: "Your message",
+  obligatoryField: "This field is obligatory",
+  fieldTooLong: "The field is too long",
+  sendMessage: "Send message",
 };

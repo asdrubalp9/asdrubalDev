@@ -21,9 +21,9 @@
       </div>
     </div>
     <div class="col-4">
-      <p class="text-primary text-h5 q-ma-none">Sobre mí</p>
+      <p class="text-primary text-h5 q-ma-none">{{ t("aboutMe") }}</p>
       <h2 class="text-h2 text-white q-mb-sm q-mt-md">
-        Soy
+        {{ t("i") }}
         <span class="text-primary text-weight-bold text-h1 primary-text">
           <br />
           Asdrúbal Pérez
@@ -31,26 +31,23 @@
         </span>
         <span class="text-white text-h3"> Desarrollador Creativo </span>
       </h2>
-      <p class="text-white text-h4 q-ma-none q-mb-md">en Santiago de Chile</p>
-      <p>
-        ¡Hola! Mi nombre es Asdrubal. Soy desarrollador de software muy
-        apasionado y dedicado a mi trabajo.
+      <p class="text-white text-h4 q-ma-none q-mb-md">
+        {{ t("in") }} Santiago de Chile
       </p>
       <p>
-        Con casi 10 años de experiencia como un desarrollador he adquirido las
-        habilidades y el conocimiento necesario para ayudarte a triunfar con tu
-        proyecto.
+        {{ t("aboutMeText1") }}
       </p>
       <p>
-        Llevamos tu visión de idea a realidad brindando las mejores soluciones
-        tecnológicas para nuestros clientes y tu negocio. Estamos aquí para
-        ayudarlo a llevar su idea del concepto a una base sólida.
+        {{ t("aboutMeText2") }}
+      </p>
+      <p>
+        {{ t("aboutMeText3") }}
       </p>
       <q-btn
         color="primary"
         rounded
         icon-right="fa-solid fa-cloud-arrow-down"
-        label="Descargar CV"
+        :label="t('headDownloadCV')"
         unelevated
         class="text-weight-bold"
         style="border: 2px solid white"
@@ -63,12 +60,14 @@
 <script>
 import { animateMovingElement } from "./../composables/movingEffect.js";
 import { onMounted, ref } from "vue";
+import { useI18n } from "vue-i18n";
 export default {
   setup() {
+    const { t } = useI18n();
     onMounted(() => {
       animateMovingElement(".moveMe");
-      animateMovingElement(".moveMe");
     });
+    return { t };
   },
 };
 </script>

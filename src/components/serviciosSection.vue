@@ -5,21 +5,19 @@
       <div class="row">
         <div class="col-6">
           <p class="text-primary text-h5 q-ma-none">
-            Lo que puedo hacer por tí
+            {{ t("whatICanDoForyou") }}
           </p>
           <h2
             class="text-h2 primary-text text-weight-bold text-white q-mb-sm q-mt-lg"
           >
-            Mis servicios
+            {{ t("headServices") }}
           </h2>
           <p>
-            Ofrecemos productos de alta calidad a precios competitivos. Nuestro
-            principal objetivo es la satisfacción del cliente, que obtenemos a
-            través de la orientación al mercado del servicio y soporte continuo.
+            {{ t("servicesContent") }}
           </p>
         </div>
         <div class="col-6 q-pa-md" v-for="(serv, k) in servicios" :key="k">
-          <Tilt :parallax="true" :options="options">
+          <Tilt :parallax="false" :options="options" :tilt="serv.tilt">
             <q-card dark class="q-pa-md" style="transform: translateZ(20px)">
               <div class="row">
                 <div
@@ -42,13 +40,16 @@
           </Tilt>
         </div>
         <div class="col-6 text-center">
-          <h2 class="text-h3 text-white q-mt-md">¿Necesitas algo diferente?</h2>
+          <h2 class="text-h3 text-white q-mt-md">
+            {{ t("servicesContent2") }}
+          </h2>
           <q-btn
-            label="Escribeme"
+            :label="t('contactMe')"
             icon-right="fa-solid fa-paper-plane"
             class="text-light q-pa-md"
             outline
             color="primary"
+            @click="scrollPageTo('#contactame')"
           />
         </div>
       </div>
@@ -58,15 +59,16 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 //import TiltComponent from "./../components/tilt.vue";
-import Tilt from "./tilt.vue";
-
+import Tilt from "./tiltComponent.vue";
+import { useI18n } from "vue-i18n";
 export default {
   componens: {
     Tilt,
   },
   setup() {
+    const { t } = useI18n();
     const options = {
       reverse: false,
       max: 35,
@@ -77,6 +79,30 @@ export default {
       speed: 300,
       transition: true,
       axis: null,
+      reset: true,
+      easing: "cubic-bezier(.03,.98,.52,.99)",
+      glare: true,
+      "max-glare": 1,
+      "glare-prerender": false,
+      // you need to add .js-tilt-glare>.js-tilt-glare-inner by yourself
+      "mouse-event-element": null,
+      // you need to add .js-tilt-glare>.js-tilt-glare-inner by yourself
+      gyroscope: true,
+      gyroscopeMinAngleX: -45,
+      gyroscopeMaxAngleX: 45,
+      gyroscopeMinAngleY: -45,
+      gyroscopeMaxAngleY: 45, // This is the top limit of the device angle on Y axis, meaning that a device rotated at this angle would tilt the element as if the mouse was on the bottom border of the element;
+    };
+    const options2 = {
+      reverse: true,
+      max: 35,
+      startX: 0,
+      startY: 0,
+      perspective: 1000,
+      scale: 1,
+      speed: 300,
+      transition: true,
+      // axis: null,
       reset: true,
       easing: "cubic-bezier(.03,.98,.52,.99)",
       glare: false,
@@ -91,33 +117,43 @@ export default {
       gyroscopeMinAngleY: -45,
       gyroscopeMaxAngleY: 45, // This is the top limit of the device angle on Y axis, meaning that a device rotated at this angle would tilt the element as if the mouse was on the bottom border of the element;
     };
+    const scrollPageTo = (navEl) => {
+      if (navEl) {
+        let element = document.querySelector(`${navEl}`);
+        if (element) element.scrollIntoView({ behavior: "smooth" });
+      }
+    };
     const servicios = ref([
       {
         nombre: "sacarme los mocos",
+        tilt: true,
         descripcion:
           "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit architecto reprehenderit numquam vitae illum. Laborum excepturi consectetur ad quas enim esse perferendis.",
         icon: "fa-solid fa-laptop-file",
       },
       {
         nombre: "sacarme los mocos",
+        tilt: true,
         descripcion:
           "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit architecto reprehenderit numquam vitae illum. Laborum excepturi consectetur ad quas enim esse perferendis.",
         icon: "fa-solid fa-laptop-file",
       },
       {
         nombre: "sacarme los mocos",
+        tilt: true,
         descripcion:
           "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit architecto reprehenderit numquam vitae illum. Laborum excepturi consectetur ad quas enim esse perferendis.",
         icon: "fa-solid fa-laptop-file",
       },
       {
         nombre: "sacarme los mocos",
+        tilt: true,
         descripcion:
           "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit architecto reprehenderit numquam vitae illum. Laborum excepturi consectetur ad quas enim esse perferendis.",
         icon: "fa-solid fa-laptop-file",
       },
     ]);
-    return { servicios, options };
+    return { servicios, options, options2, t };
   },
   components: { Tilt },
 };

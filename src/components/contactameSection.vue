@@ -7,24 +7,27 @@
     <div class="col-8">
       <div class="row justify-around">
         <div class="col-12">
-          <p class="text-center text-primary text-h5 q-ma-none">Contáctame</p>
+          <p class="text-center text-primary text-h5 q-ma-none">
+            {{ t("contactMe") }}
+          </p>
           <p
             class="text-center primary-text text-white text-h2 text-weight-bold"
           >
-            Escribeme con confianza
+            {{ t("writeToMe") }}
           </p>
         </div>
         <div class="col-5">
           <p>
-            Por favor, llena el formulario en esta sección y te responderé a la
-            brevedad posible
+            {{ t("contactMeContent") }}
           </p>
           <div class="row">
             <div class="col-2 flex flex-center">
               <q-icon name="fa-solid fa-envelope" size="xl" />
             </div>
             <div class="col">
-              <p class="text-white font-weight-bold q-ma-none">Correo</p>
+              <p class="text-white font-weight-bold q-ma-none">
+                {{ t("email") }}
+              </p>
               <p
                 class="text-white primary-text text-h4 q-ma-none primary-color"
               >
@@ -39,7 +42,7 @@
             <q-btn
               color="primary"
               icon-right="fa-solid fa-paper-plane"
-              label="Enviar mensaje"
+              :label="t('sendMessage')"
               unelevated
               class="full-width q-mt-lg q-pa-md"
             />
@@ -52,48 +55,53 @@
 
 <script>
 import { isValidEmail } from "./../composables/isValidEmail.js";
+import { ref, computed } from "vue";
 import { doConfetti } from "./../composables/confettiFn.js";
 import FormFieldGenerator from "src/components/FormFieldGenerator.vue";
-
-import { ref } from "vue";
+import { useI18n } from "vue-i18n";
 export default {
   components: {
     FormFieldGenerator,
   },
   setup() {
+    const { t } = useI18n();
     const contactForm = ref(null);
     const form = ref([
       {
         type: "text",
-        label: "Tu nombre",
+        label: computed(() => t("yourName")),
         icon: "fa-solid fa-circle-xmark",
         value: null,
         rules: [(val) => !!val || "Precio es requerido"],
       },
       {
         type: "email",
-        label: "Tu correo",
+        label: computed(() => t("yourEmail")),
         icon: "fa-solid fa-circle-xmark",
         value: null,
         rules: [
-          (val) => (val !== null && val !== "") || "Este campo es obligatorio",
+          (val) =>
+            (val !== null && val !== "") ||
+            computed(() => t("obligatoryField")),
           isValidEmail,
         ],
       },
       {
         type: "text",
-        label: "Tu teléfono",
+        label: computed(() => t("yourPhone")),
         icon: "fa-solid fa-circle-xmark",
         value: null,
-        rules: [(val) => val.length > 20 || "El campo es muy largo"],
+        rules: [(val) => val.length > 20 || computed(() => t("fieldTooLong"))],
       },
       {
         type: "textarea",
-        label: "Tu mensaje",
+        label: computed(() => t("yourMessage")),
         icon: "fa-solid fa-circle-xmark",
         value: null,
         rules: [
-          (val) => (val !== null && val !== "") || "Este campo es obligatorio",
+          (val) =>
+            (val !== null && val !== "") ||
+            computed(() => t("obligatoryField")),
         ],
       },
     ]);
@@ -101,6 +109,7 @@ export default {
     return {
       form,
       contactForm,
+      t,
     };
   },
 };

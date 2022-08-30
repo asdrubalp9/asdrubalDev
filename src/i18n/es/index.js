@@ -8,4 +8,34 @@ export default {
   headServices: "Mis servicios",
   headContact: "Contáctame",
   headDownloadCV: "Descarga mi CV",
+  downloadCvLink: "1QvKE24NKLK3zw7bZsXLtLLhypi0n8JjZu4KIHdCc17w",
+  creativeDeveloper: "Desarrollador creativo",
+  cloudArchiteq: "Arquitecto de nube",
+  headlineSEO: "Asesor SEO para empresas y startups",
+  contactMe: "Escribeme",
+  homeTitle: "Hola, soy",
+  aboutMe: "Sobre mí",
+  i: "Soy",
+  in: "en",
+  aboutMeText1:
+    "¡Hola! Mi nombre es Asdrubal. Soy desarrollador de software muy apasionado y dedicado a mi trabajo.",
+  aboutMeText2:
+    "Con casi 10 años de experiencia como un desarrollador he adquirido las habilidades y el conocimiento necesario para ayudarte a triunfar con tu proyecto.",
+  aboutMeText3:
+    "Llevamos tu visión de idea a realidad brindando las mejores soluciones tecnológicas para nuestros clientes y tu negocio. Estamos aquí para ayudarlo a llevar su idea del concepto a una base sólida.",
+  whatICanDoForyou: "Lo que puedo hacer por tí",
+  servicesContent:
+    "Ofrecemos servicios de alta calidad a precios competitivos. Nuestro principal objetivo es la satisfacción del cliente, que obtenemos a través de la orientación al mercado del servicio y soporte continuo.",
+  servicesContent2: "¿Necesitas algo diferente?",
+  writeToMe: "Escribeme con confianza",
+  contactMeContent:
+    "Por favor, llena el formulario en esta sección y te responderé a la brevedad posible",
+  email: "Correo",
+  yourName: "Tu nombre",
+  yourEmail: "Tu correo",
+  yourPhone: "Tu teléfono",
+  yourMessage: "Tu mensaje",
+  obligatoryField: "Este campo es obligatorio",
+  fieldTooLong: "El campo es muy largo",
+  sendMessage: "Enviar mensaje",
 };

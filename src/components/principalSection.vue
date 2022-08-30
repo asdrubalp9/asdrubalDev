@@ -21,7 +21,7 @@
     </div>
     <div class="col-6 full-height flex justify-around column q-py-xl">
       <h1 class="hero-text text-h4">
-        Hola, Soy
+        {{ t("homeTitle") }}
         <span class="primary-text"> Drú</span>
         <div class="skillzHolder rotate-1">
           <span class="cd-words-wrapper">
@@ -40,7 +40,7 @@
       <div class="row">
         <div class="col-6">
           <q-btn
-            label="Escribeme"
+            :label="t('contactMe')"
             color="primary"
             unelevated
             class="q-px-xl q-py-md text-weight-bold"
@@ -52,7 +52,7 @@
             flat
             rounded
             class="q-px-xl q-py-md text-weight-bold text-white"
-            label="Sobre mí"
+            :label="t('aboutMe')"
             style="border: 1px solid white"
           />
         </div>
@@ -60,7 +60,7 @@
       <div class="row">
         <div class="col-12">
           <a
-            class="text-white primary-text"
+            class="text-white primary-text text-h4"
             href="mailto:asdrubaldev@gmail.com"
             style="text-decoration: none"
           >
@@ -78,13 +78,22 @@
 </template>
 
 <script>
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { jarallax } from "jarallax";
-
+import { useI18n } from "vue-i18n";
 export default {
   setup() {
+    const { t } = useI18n();
     const refSkills = ref(null);
-    const skills = ["Desarrollador Creativo", "Cloud architect", "Asesor SEO"];
+    const creativeDeveloper = computed(() => t("creativeDeveloper"));
+    const cloudArchitect = computed(() => t("cloudArchiteq"));
+    const headlineSEO = computed(() => t("creativeDeveloper"));
+    // const skills = ref([creativeDeveloper, cloudArchitect, headlineSEO]);
+    const skills = ref([
+      "Desarrollador creativo",
+      "Cloud arquitect",
+      "asesor seo",
+    ]);
     var animationDelay = 2500,
       //loading bar effect
       barAnimationDelay = 3800,
@@ -161,6 +170,7 @@ export default {
     return {
       skills,
       refSkills,
+      t,
     };
   },
 };

@@ -55,6 +55,7 @@
         <q-btn
           v-if="['download'].includes(menu.type)"
           flat
+          target="_blank"
           class="q-ma-md primary-text topnavbutton"
           :outline="menu.outline"
           :rounded="menu.rounded"
@@ -62,9 +63,9 @@
           :icon-right="menu.iconRight"
           :aria-label="menu.ariaLabel"
           :class="menu.class"
+          :href="menu.link"
           :style="menu.style"
           :key="k"
-          @click="scrollPageTo(menu.scrollTo)"
         />
       </template>
     </q-toolbar>
@@ -73,7 +74,6 @@
 
 <script>
 import { computed, onMounted, ref } from "vue";
-import { useLanguageStore } from "stores/language";
 import { useI18n } from "vue-i18n";
 
 export default {
@@ -81,7 +81,6 @@ export default {
   setup() {
     const { locale } = useI18n({ useScope: "global" });
     const { t } = useI18n();
-    const lang = useLanguageStore();
     const refHead = ref(null);
     const elevated = ref(false);
     const toolbarClass = ref("");
@@ -134,10 +133,15 @@ export default {
       {
         label: computed(() => t("headDownloadCV")),
         type: "download",
+        link: computed(() => {
+          return `https://docs.google.com/presentation/d/${t(
+            "downloadCvLink"
+          )}/export/pdf`;
+        }),
         iconRight: "fa-solid fa-cloud-arrow-down",
         outline: true,
         rounded: true,
-        class: "bg-white text-primary text-weight-bold",
+        class: "bg-white text-primary text-weight-bold toolbar-cvLink",
         style: "border: 4px solid #ea4747",
       },
       {
@@ -159,7 +163,6 @@ export default {
       toolbarClass,
       topNavMenu,
       scrollPageTo,
-      lang,
       toggleLang,
       locale,
       toolbarTitleClass,
@@ -170,6 +173,9 @@ export default {
 
 <style>
 .topToolBar {
-  transition: all 0.3s ease-in-out;
+  transition: all 0.6s ease-in-out;
+}
+.toolbar-cvLink .q-btn__content span {
+  margin-top: 4px !important;
 }
 </style>
