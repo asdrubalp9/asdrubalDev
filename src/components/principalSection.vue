@@ -85,17 +85,38 @@
       </div>
     </div>
     <div class="col-5 full-height">
-      <div class="parallaxWrapper full-height">
-        <img src="imgs/dru.png" />
+      <div class="row full-height">
+        <div
+          class="col-12 parallaxHolder full-height"
+          data-relative-input="true"
+        >
+          <div class="main">
+            <img src="imgs/dru.png" class="layer" data-depth="0.1" />
+          </div>
+          <div class="one">
+            <div class="in layer" data-depth="0.14"></div>
+          </div>
+          <div class="two">
+            <div class="in layer" data-depth="0.18"></div>
+          </div>
+          <div class="three">
+            <div class="in layer" data-depth="0.22"></div>
+          </div>
+          <div class="four">
+            <div class="in layer" data-depth="0.26"></div>
+          </div>
+          <div class="five">
+            <div class="in layer" data-depth="0.3"></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { computed, onMounted, ref } from "vue";
-
-import { jarallax } from "jarallax";
+import { onMounted, ref } from "vue";
+import Parallax from "parallax-js";
 import { useI18n } from "vue-i18n";
 export default {
   setup() {
@@ -178,13 +199,17 @@ export default {
 
     onMounted(() => {
       animateHeadline(document.querySelectorAll(".skillzHolder"));
-      jarallax(document.querySelectorAll(".parallaxWrapper"), {
-        speed: 0.5,
-        relativeInput: true,
-        onInit: function () {
-          console.log("ready!");
-        },
-      });
+      // const paraInstance = new Parallax(
+      //   document.querySelector(".parallaxHolder"),
+      //   {
+      //     relativeInput: true,
+      //     speed: 0.2,
+      //     onInit: (instance) => {
+      //       console.log("Parallax initialized", instance);
+      //     },
+      //   }
+      // );
+      // console.log("paraInstance", paraInstance);
     });
     return {
       skills,
@@ -210,5 +235,61 @@ export default {
   line-height: 2em;
   font-size: 2em;
   font-weight: bolder;
+}
+.parallaxHolder {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  position: relative;
+}
+.parallaxHolder .in {
+  background-color: #ea4343;
+  width: 100%;
+  height: 100%;
+}
+.parallaxHolder .main {
+  position: absolute;
+  right: 0px;
+  bottom: -10px;
+  width: 100%;
+}
+.parallaxHolder .one {
+  position: absolute;
+  top: 150px;
+  bottom: 150px;
+  right: -55px;
+  width: 380px;
+  z-index: -4;
+}
+.parallaxHolder .two {
+  position: absolute;
+  bottom: 80px;
+  left: -70px;
+  width: 180px;
+  height: 180px;
+  z-index: 2;
+}
+.parallaxHolder .three {
+  position: absolute;
+  top: 235px;
+  left: -110px;
+  width: 80px;
+  height: 110px;
+  z-index: 2;
+}
+.parallaxHolder .four {
+  position: absolute;
+  width: 440px;
+  height: 470px;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 20px;
+  z-index: -1;
+}
+.parallaxHolder .five {
+  position: absolute;
+  width: 50px;
+  height: 70px;
+  bottom: 32%;
+  right: -180px;
 }
 </style>
