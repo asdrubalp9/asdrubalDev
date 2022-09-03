@@ -47,6 +47,10 @@ export default {
   service3Title: "SEO Advisor",
   service3Desc:
     "I can help you increase visits to your website with my SEO services. I could advice you  or build your website with SEO in mind so that it ranks higher on search engines like Google, Bing and Yahoo!",
-  service4Title: "Cloud architect",
-  service5Desc: "",
+  service4Title: "Programming advice",
+  service4Desc:
+    "If you’re interested in discussing career change, self-study or remote work and want personalized advice on what path might fit you best, connect with Me: Send me a message now.",
+  service5Title: "Pair Programming",
+  service5Desc:
+    "Do you think we can collaborate on a project? I have almost 10 years' experience working in all kinds of industries. I am passionate about helping organizations gain an edge by implementing technologies that allow them to perform deeper level analyses.",
 };

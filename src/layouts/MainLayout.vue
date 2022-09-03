@@ -1,10 +1,20 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <HeaderComponent />
-    <q-drawer v-model="leftDrawerOpen" bordered>
-      <q-list>
-        <q-item-label header> </q-item-label>
-      </q-list>
+    <HeaderComponent
+      :topNavMenu="topNavMenu"
+      @toggleLeftDrawer="leftDrawerOpen = !leftDrawerOpen"
+      @toggleLang="drawerToggleLang"
+    />
+    <q-drawer v-model="leftDrawerOpen" bordered class="leftDrawer">
+      <div class="flex row justify-end">
+        <q-btn
+          flat
+          icon="fa-solid fa-arrow-left"
+          @click="leftDrawerOpen = false"
+          class="block q-mt-md"
+        />
+      </div>
+      <MenuIterator :options="topNavMenu" />
     </q-drawer>
     <q-page-container>
       <router-view />
@@ -13,20 +23,79 @@
 </template>
 
 <script>
-import { defineComponent, onMounted, ref } from "vue";
+import { useI18n } from "vue-i18n";
+import { computed, defineComponent, onMounted, ref } from "vue";
 import HeaderComponent from "../components/headerComponent.vue";
+import MenuIterator from "src/components/menuIterator.vue";
 export default defineComponent({
   name: "MainLayout",
   setup() {
+    const { locale } = useI18n({ useScope: "global" });
+    const { t } = useI18n();
     const leftDrawerOpen = ref(false);
+    const topNavMenu = ref([
+      {
+        label: computed(() => t("headAbout")),
+        type: "link",
+        // icon: "list",
+        scrollTo: "#dru",
+      },
+      /*
+      {
+        label: computed(() => t("headPortfolio")),
+        type: "link",
+        // icon: "list",
+        scrollTo: "#portafolio",
+      },
+      //*/
+      {
+        label: computed(() => t("headServices")),
+        type: "link",
+        // icon: "list",
+        scrollTo: "#servicios",
+      },
+      {
+        label: computed(() => t("headContact")),
+        type: "link",
+        // icon: "list",
+        scrollTo: "#contactame",
+      },
+      {
+        label: computed(() => t("headDownloadCV")),
+        type: "download",
+        link: computed(() => {
+          return `https://docs.google.com/presentation/d/${t(
+            "downloadCvLink"
+          )}/export/pdf`;
+        }),
+        iconRight: "fa-solid fa-cloud-arrow-down",
+        outline: true,
+        rounded: true,
+        class: "bg-white text-primary text-weight-bold toolbar-cvLink",
+        style: "border: 4px solid #ea4747",
+      },
+      {
+        label: computed(() => (locale.value === "en-US" ? "ES" : "US")),
+        type: "action",
+        class: "bg-white text-primary text-weight-bold",
+        style: "border: 4px solid #ea4747",
+      },
+    ]);
     return {
+      topNavMenu,
       leftDrawerOpen,
+      drawerToggleLang(val = null) {
+        console.log("val", val);
+        if (val === "inDrawer") {
+          leftDrawerOpen.value = false;
+        }
+      },
       toggleLeftDrawer() {
         leftDrawerOpen.value = !leftDrawerOpen.value;
       },
     };
   },
-  components: { HeaderComponent },
+  components: { HeaderComponent, MenuIterator },
 });
 </script>
 <style>

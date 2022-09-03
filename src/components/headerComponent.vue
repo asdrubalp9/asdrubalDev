@@ -6,16 +6,6 @@
     id="topHeader"
   >
     <q-toolbar :class="toolbarClass" class="topToolBar">
-      <!--
-          <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
-        />
-        -->
       <q-toolbar-title
         class="primary-text text-h2 q-pt-md q-ml-xl text-weight-bold toolbarTitle"
         :class="toolbarTitleClass"
@@ -23,64 +13,37 @@
         Drú
       </q-toolbar-title>
       <q-space />
-      <template v-for="(menu, k) in topNavMenu">
-        <q-btn
-          v-if="menu.type === 'link'"
-          flat
-          class="q-ma-md primary-text topnavbutton"
-          :outline="menu.outline"
-          :rounded="menu.rounded"
-          :label="menu.label"
-          :icon-right="menu.iconRight"
-          :aria-label="menu.ariaLabel"
-          :class="menu.class"
-          :style="menu.style"
-          :key="k"
-          @click="scrollPageTo(menu.scrollTo)"
-        />
-        <q-btn
-          v-if="['action'].includes(menu.type)"
-          flat
-          class="q-ma-md primary-text topnavbutton"
-          :outline="menu.outline"
-          :rounded="menu.rounded"
-          :label="menu.label"
-          :icon-right="menu.iconRight"
-          :aria-label="menu.ariaLabel"
-          :class="menu.class"
-          :style="menu.style"
-          :key="k"
-          @click="toggleLang()"
-        />
-        <q-btn
-          v-if="['download'].includes(menu.type)"
-          flat
-          target="_blank"
-          class="q-ma-md primary-text topnavbutton"
-          :outline="menu.outline"
-          :rounded="menu.rounded"
-          :label="menu.label"
-          :icon-right="menu.iconRight"
-          :aria-label="menu.ariaLabel"
-          :class="menu.class"
-          :href="menu.link"
-          :style="menu.style"
-          :key="k"
-        />
-      </template>
+      <div class="gt-md">
+        <MenuIterator :options="topNavMenu" />
+      </div>
+      <q-btn
+        flat
+        dense
+        round
+        icon="fa-solid fa-bars"
+        aria-label="Menu"
+        @click="$emit('toggleLeftDrawer')"
+        class="lt-md"
+      />
     </q-toolbar>
   </q-header>
 </template>
 
 <script>
-import { computed, onMounted, ref } from "vue";
-import { useI18n } from "vue-i18n";
+import { onMounted, ref } from "vue";
+
+import MenuIterator from "./menuIterator.vue";
 
 export default {
   name: "HeaderComponent",
+  props: {
+    topNavMenu: {
+      type: Array,
+      default: () => [],
+    },
+  },
+  emits: ["toggleLeftDrawer"],
   setup() {
-    const { locale } = useI18n({ useScope: "global" });
-    const { t } = useI18n();
     const refHead = ref(null);
     const elevated = ref(false);
     const toolbarClass = ref("");
@@ -102,74 +65,26 @@ export default {
         }
       });
     });
-    function toggleLang() {
-      locale.value = locale.value === "en-US" ? "es" : "en-US";
-    }
-    const topNavMenu = ref([
-      {
-        label: computed(() => t("headAbout")),
-        type: "link",
-        // icon: "list",
-        scrollTo: "#dru",
-      },
-      /*
-      {
-        label: computed(() => t("headPortfolio")),
-        type: "link",
-        // icon: "list",
-        scrollTo: "#portafolio",
-      },
-      //*/
-      {
-        label: computed(() => t("headServices")),
-        type: "link",
-        // icon: "list",
-        scrollTo: "#servicios",
-      },
-      {
-        label: computed(() => t("headContact")),
-        type: "link",
-        // icon: "list",
-        scrollTo: "#contactame",
-      },
-      {
-        label: computed(() => t("headDownloadCV")),
-        type: "download",
-        link: computed(() => {
-          return `https://docs.google.com/presentation/d/${t(
-            "downloadCvLink"
-          )}/export/pdf`;
-        }),
-        iconRight: "fa-solid fa-cloud-arrow-down",
-        outline: true,
-        rounded: true,
-        class: "bg-white text-primary text-weight-bold toolbar-cvLink",
-        style: "border: 4px solid #ea4747",
-      },
-      {
-        label: computed(() => (locale.value === "en-US" ? "ES" : "US")),
-        type: "action",
-        class: "bg-white text-primary text-weight-bold",
-        style: "border: 4px solid #ea4747",
-      },
-    ]);
+
     const scrollPageTo = (navEl) => {
       if (navEl) {
         let element = document.querySelector(`${navEl}`);
         if (element) element.scrollIntoView({ behavior: "smooth" });
       }
     };
+    const toggleMenu = () => {
+      // refHead.value.$refs.menu.toggle();
+    };
     return {
       refHead,
       elevated,
       toolbarClass,
-      topNavMenu,
       scrollPageTo,
-      toggleLang,
-      locale,
       toolbarTitleClass,
+      toggleMenu,
     };
   },
+  components: { MenuIterator },
 };
 </script>
 

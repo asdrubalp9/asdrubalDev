@@ -47,6 +47,10 @@ export default {
   service3Title: "ASESOR SEO",
   service3Desc:
     "Puedo ayudarte a aumentar las visitas a tu sitio web con mis servicios de SEO. ¡Podría aconsejarle o construir su sitio web con SEO en mente para que se clasifique más alto en los motores de búsqueda como Google, Bing y Yahoo!",
-  service4Title: "Cloud architect",
-  service4Desc: "",
+  service4Title: "consejos de programación",
+  service4Desc:
+    "Si está interesado en hablar sobre el cambio de carrera, el autoestudio o el trabajo remoto y desea asesoramiento personalizado sobre qué camino podría ser mejor para usted, conéctese conmigo: envíeme un mensaje ahora.",
+  service5Title: "Pair Programming",
+  service5Desc:
+    "¿Crees que podemos colaborar en un proyecto? Tengo casi 10 años de experiencia trabajando en todo tipo de industrias. Me apasiona ayudar a las organizaciones a obtener una ventaja mediante la implementación de tecnologías que les permitan realizar análisis de nivel más profundo.",
 };

@@ -1,6 +1,6 @@
 <template>
   <div class="row flex flex-center" style="height: 92vh" id="home">
-    <div class="col-1 column flex">
+    <div class="col-1 column flex gt-md">
       <!--
         <q-icon
           name="fa-brands fa-twitter"
@@ -21,7 +21,9 @@
         />
       </a>
     </div>
-    <div class="col-6 full-height flex justify-around column q-py-xl">
+    <div
+      class="col-11 col-md-6 col-sm-11 full-height flex justify-around column q-py-xl"
+    >
       <h1 class="hero-text text-h4">
         {{ t("homeTitle") }}
         <span class="primary-text"> Drú</span>
@@ -53,20 +55,20 @@
         </div>
       </h1>
       <div class="row">
-        <div class="col-6">
+        <div class="col-12 col-md-6 flex justify-center">
           <q-btn
             :label="t('contactMe')"
             color="primary"
             unelevated
-            class="q-px-xl q-py-md text-weight-bold"
+            class="q-px-xl q-py-md text-weight-bold contactMeBtnHome"
             icon-right="fa-solid fa-paper-plane"
           />
         </div>
-        <div class="col-6">
+        <div class="col-12 col-md-6 flex justify-center">
           <q-btn
             flat
             rounded
-            class="q-px-xl q-py-md text-weight-bold text-white"
+            class="q-px-xl q-py-md text-weight-bold text-white aboutMeBtnHome"
             :label="t('aboutMe')"
             style="border: 1px solid white"
           />
@@ -84,30 +86,63 @@
         </div>
       </div>
     </div>
-    <div class="col-5 full-height">
+    <div class="col-md-5 gt-sm full-height">
       <div class="row full-height">
         <div
           class="col-12 parallaxHolder full-height"
           data-relative-input="true"
         >
           <div class="main">
-            <img src="imgs/dru.png" class="layer" data-depth="0.1" />
+            <img
+              src="imgs/dru.png"
+              class="layer moveMe"
+              data-direction="x"
+              data-reverse="yes"
+            />
           </div>
-          <div class="one">
-            <div class="in layer" data-depth="0.14"></div>
-          </div>
-          <div class="two">
-            <div class="in layer" data-depth="0.18"></div>
-          </div>
-          <div class="three">
-            <div class="in layer" data-depth="0.22"></div>
-          </div>
-          <div class="four">
-            <div class="in layer" data-depth="0.26"></div>
-          </div>
-          <div class="five">
-            <div class="in layer" data-depth="0.3"></div>
-          </div>
+          <Tilt :parallax="false" :options="options">
+            <div class="one">
+              <div
+                class="in layer moveMe rounded-borders-lg"
+                data-direction="y"
+                data-reverse="no"
+              ></div>
+            </div>
+          </Tilt>
+          <Tilt :parallax="false" :options="options">
+            <div class="two">
+              <div
+                class="in layer moveMe rounded-borders-lg"
+                data-direction="x"
+                data-reverse="yes"
+              ></div>
+            </div>
+          </Tilt>
+          <Tilt :parallax="false" :options="options">
+            <div class="three">
+              <div
+                class="in layer moveMe"
+                data-direction="y"
+                data-reverse="no"
+              ></div>
+            </div>
+          </Tilt>
+          <Tilt :parallax="false" :options="options"
+            ><div class="four">
+              <div
+                class="in layer moveMe rounded-borders-lg"
+                data-direction="x"
+                data-reverse="yes"
+              ></div></div
+          ></Tilt>
+          <Tilt :parallax="false" :options="options"
+            ><div class="five">
+              <div
+                class="in layer moveMe rounded-borders-lg"
+                data-direction="x"
+                data-reverse="yes"
+              ></div></div
+          ></Tilt>
         </div>
       </div>
     </div>
@@ -116,10 +151,38 @@
 
 <script>
 import { onMounted, ref } from "vue";
-import Parallax from "parallax-js";
+import { animateMovingElement } from "./../composables/movingEffect.js";
+import Tilt from "./tiltComponent.vue";
 import { useI18n } from "vue-i18n";
 export default {
+  components: {
+    Tilt,
+  },
   setup() {
+    const options = {
+      reverse: false,
+      max: 35,
+      startX: 0,
+      startY: 0,
+      perspective: 1000,
+      scale: 1,
+      speed: 300,
+      transition: true,
+      axis: null,
+      reset: true,
+      easing: "cubic-bezier(.03,.98,.52,.99)",
+      glare: true,
+      "max-glare": 1,
+      "glare-prerender": false,
+      // you need to add .js-tilt-glare>.js-tilt-glare-inner by yourself
+      "mouse-event-element": null,
+      // you need to add .js-tilt-glare>.js-tilt-glare-inner by yourself
+      gyroscope: true,
+      gyroscopeMinAngleX: -45,
+      gyroscopeMaxAngleX: 45,
+      gyroscopeMinAngleY: -45,
+      gyroscopeMaxAngleY: 45, // This is the top limit of the device angle on Y axis, meaning that a device rotated at this angle would tilt the element as if the mouse was on the bottom border of the element;
+    };
     const { locale } = useI18n({ useScope: "global" });
     const { t } = useI18n();
     const refSkills = ref(null);
@@ -199,17 +262,9 @@ export default {
 
     onMounted(() => {
       animateHeadline(document.querySelectorAll(".skillzHolder"));
-      // const paraInstance = new Parallax(
-      //   document.querySelector(".parallaxHolder"),
-      //   {
-      //     relativeInput: true,
-      //     speed: 0.2,
-      //     onInit: (instance) => {
-      //       console.log("Parallax initialized", instance);
-      //     },
-      //   }
-      // );
-      // console.log("paraInstance", paraInstance);
+      onMounted(() => {
+        animateMovingElement(".moveMe");
+      });
     });
     return {
       skills,
@@ -217,6 +272,7 @@ export default {
       t,
       locale,
       skillsEN,
+      options,
     };
   },
 };
@@ -291,5 +347,39 @@ export default {
   height: 70px;
   bottom: 32%;
   right: -180px;
+}
+@media (max-width: 768px) {
+  .parallaxHolder .one {
+    width: 280px;
+  }
+  .parallaxHolder .two {
+    width: 180px;
+    height: 180px;
+  }
+  .parallaxHolder .three {
+    width: 80px;
+    height: 110px;
+  }
+  .parallaxHolder .four {
+    width: 340px;
+    height: 370px;
+  }
+  .parallaxHolder .five {
+    width: 50px;
+    height: 70px;
+  }
+  .skillzHolder {
+    width: 80%;
+  }
+  #home a.text-h4 {
+    font-size: 23px;
+  }
+  .contactMeBtnHome,
+  .aboutMeBtnHome {
+    width: 100%;
+  }
+  .aboutMeBtnHome {
+    margin-top: 1em;
+  }
 }
 </style>
