@@ -60,7 +60,6 @@ export default {
     const { locale } = useI18n({ useScope: "global" });
     function toggleLang() {
       locale.value = locale.value === "en-US" ? "es" : "en-US";
-      console.log("toooggleee");
       context.emit("toggleLang", "inDrawer");
     }
     return {
