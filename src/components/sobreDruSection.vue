@@ -1,6 +1,6 @@
 <template>
-  <div class="row flex flex-center bg-darker" style="height: 92vh" id="dru">
-    <div class="col-4 full-height">
+  <div class="row flex flex-center bg-darker" id="dru">
+    <div class="col-4 full-height gt-md">
       <div class="imagesHolder">
         <div
           class="cuadrado moveMe bg-primary"
@@ -20,27 +20,31 @@
         </div>
       </div>
     </div>
-    <div class="col-4">
+    <div class="col-11 col-md-4 aboutContent">
       <p class="text-primary text-h5 q-ma-none">{{ t("aboutMe") }}</p>
       <h2 class="text-h2 text-white q-mb-sm q-mt-md">
         {{ t("i") }}
-        <span class="text-primary text-weight-bold text-h1 primary-text">
+        <span
+          class="text-primary text-weight-bold text-h1 primary-text dru_primaryName"
+        >
           <br />
           Asdrúbal Pérez
           <br />
         </span>
-        <span class="text-white text-h3"> {{ t("creativeDeveloper") }} </span>
+        <span class="text-white text-h3 Dru_title">
+          {{ t("creativeDeveloper") }}
+        </span>
       </h2>
       <p class="text-white text-h4 q-ma-none q-mb-md">
         {{ t("in") }} Santiago de Chile
       </p>
-      <p>
+      <p class="aboutText">
         {{ t("aboutMeText1") }}
       </p>
-      <p>
+      <p class="aboutText">
         {{ t("aboutMeText2") }}
       </p>
-      <p>
+      <p class="aboutText">
         {{ t("aboutMeText3") }}
       </p>
       <q-btn
@@ -49,11 +53,11 @@
         icon-right="fa-solid fa-cloud-arrow-down"
         :label="t('headDownloadCV')"
         unelevated
-        class="text-weight-bold"
+        class="text-weight-bold aboutContactBtn"
         style="border: 2px solid white"
       />
     </div>
-    <div class="col-4 text-right self-end"></div>
+    <div class="col-4 text-right self-end hidden"></div>
   </div>
 </template>
 
@@ -121,5 +125,34 @@ export default {
   left: 111px;
   z-index: 0;
   border-radius: 1em;
+}
+#dru {
+  height: 92vh;
+}
+@media (max-width: 768px) {
+  #dru {
+    height: unset;
+    padding-top: 2em;
+    padding-bottom: 2em;
+  }
+  .aboutContent {
+    padding: 1em;
+  }
+  #dru p {
+    text-align: justify;
+  }
+  .dru_primaryName {
+    font-size: 1em;
+    line-height: 1em;
+  }
+  .aboutContactBtn {
+    width: 100%;
+    padding: 1em;
+    margin-top: 1em;
+  }
+  .Dru_title {
+    font-size: 0.7em !important;
+    line-height: 0.1em;
+  }
 }
 </style>

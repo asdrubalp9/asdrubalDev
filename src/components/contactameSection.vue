@@ -1,22 +1,18 @@
 <template>
-  <div
-    class="row bg-darker flex justify-center q-pa-xl"
-    style="height: 92vh"
-    id="contactame"
-  >
-    <div class="col-8">
+  <div class="row bg-darker flex justify-center q-pa-xl" id="contactame">
+    <div class="col-12 col-md-8">
       <div class="row justify-around">
         <div class="col-12">
           <p class="text-center text-primary text-h5 q-ma-none">
             {{ t("contactMe") }}
           </p>
           <p
-            class="text-center primary-text text-white text-h2 text-weight-bold"
+            class="text-center primary-text text-white text-h2 text-weight-bold contactame_title"
           >
             {{ t("writeToMe") }}
           </p>
         </div>
-        <div class="col-5">
+        <div class="col-md-5 col-12 contactame_content">
           <p>
             {{ t("contactMeContent") }}
           </p>
@@ -24,19 +20,19 @@
             <div class="col-2 flex flex-center">
               <q-icon name="fa-solid fa-envelope" size="xl" />
             </div>
-            <div class="col">
+            <div class="col-12">
               <p class="text-white font-weight-bold q-ma-none">
                 {{ t("email") }}
               </p>
               <p
-                class="text-white primary-text text-h4 q-ma-none primary-color"
+                class="text-white primary-text text-h4 q-ma-none primary-color contactame_emailAddr"
               >
                 asdrubaldev@gmail.com
               </p>
             </div>
           </div>
         </div>
-        <div class="col-6">
+        <div class="col-md-6 col-12">
           <q-form ref="contactForm">
             <form-field-generator :fields="form" />
             <q-btn
@@ -125,9 +121,27 @@ export default {
   font-size: 2em;
   font-weight: bolder;
 }
+#contactame {
+  height: 92vh;
+}
 .q-field [role="alert"] {
   font-size: 13px !important;
   font-weight: bold;
   color: #ed3333;
+}
+@media (max-width: 768px) {
+  .contactame_emailAddr {
+    font-size: 1.2em;
+  }
+  .contactame_content {
+    text-align: justify;
+  }
+  .contactame_title {
+    font-size: 2em;
+    line-height: 1.5em;
+  }
+  #contactame {
+    height: unset;
+  }
 }
 </style>
