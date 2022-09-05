@@ -99,10 +99,10 @@ export default defineComponent({
 });
 </script>
 <style>
-.topnavbutton {
+.menuIteratorItem {
   transition: all 0.3s;
 }
-.topnavbutton:hover {
+.menuIteratorItem:hover {
   color: var(--q-primary);
   transition: all 0.3s;
 }

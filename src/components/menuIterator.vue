@@ -3,7 +3,7 @@
     <q-btn
       v-if="menu.type === 'link'"
       flat
-      class="q-ma-md primary-text topnavbutton"
+      class="q-ma-md primary-text menuIteratorItem"
       :outline="menu.outline"
       :rounded="menu.rounded"
       :label="menu.label"
@@ -17,7 +17,7 @@
     <q-btn
       v-if="['action'].includes(menu.type)"
       flat
-      class="q-ma-md primary-text topnavbutton"
+      class="q-ma-md primary-text menuIteratorItem"
       :outline="menu.outline"
       :rounded="menu.rounded"
       :label="menu.label"
@@ -32,7 +32,7 @@
       v-if="['download'].includes(menu.type)"
       flat
       target="_blank"
-      class="q-ma-md primary-text topnavbutton TopNavBtn_download"
+      class="q-ma-md primary-text menuIteratorItem TopNavBtn_download"
       :outline="menu.outline"
       :rounded="menu.rounded"
       :label="menu.label"
@@ -58,6 +58,7 @@ export default {
   emit: ["toggleLang"],
   setup(props, context) {
     const scrollPageTo = (navEl) => {
+      console.log("navel", navEl);
       if (navEl) {
         let element = document.querySelector(`${navEl}`);
         if (element) element.scrollIntoView({ behavior: "smooth" });
@@ -79,5 +80,8 @@ export default {
 <style>
 .leftDrawer .TopNavBtn_download {
   width: 87%;
+}
+.leftDrawer .menuIteratorItem {
+  width: 89%;
 }
 </style>
