@@ -1,6 +1,6 @@
 <template>
-  <div class="row flex flex-center bg-darker" id="dru">
-    <div class="col-4 full-height gt-md">
+  <div class="row flex justify-around bg-darker q-py-xl" id="dru">
+    <div class="col-4 full-height gt-md self-center">
       <div class="imagesHolder">
         <div
           class="cuadrado moveMe bg-primary"
@@ -127,7 +127,7 @@ export default {
   border-radius: 1em;
 }
 #dru {
-  height: 92vh;
+  min-height: 92vh;
 }
 @media (max-width: 768px) {
   #dru {

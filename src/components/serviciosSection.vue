@@ -1,7 +1,6 @@
 <template>
-  <div class="row flex flex-center q-pa-xl" id="servicios">
-    <div class="col-md-2"></div>
-    <div class="col-md-8">
+  <div class="row flex justify-center q-pa-xl" id="servicios">
+    <div class="col-md-11 col-lg-8">
       <div class="row">
         <div class="col-md-6">
           <p class="text-primary text-h5 q-ma-none">
@@ -16,7 +15,11 @@
             {{ t("servicesContent") }}
           </p>
         </div>
-        <div class="col-md-6 q-pa-md" v-for="(serv, k) in servicios" :key="k">
+        <div
+          class="col-md-6 q-pa-md servicios_cardParent"
+          v-for="(serv, k) in servicios"
+          :key="k"
+        >
           <Tilt
             :parallax="false"
             :options="options"
@@ -49,7 +52,7 @@
             </q-card>
           </Tilt>
         </div>
-        <div class="col-12 text-center">
+        <div class="col-12 text-center servicios_cardParent">
           <h2 class="text-h3 text-white q-mt-md">
             {{ t("servicesContent2") }}
           </h2>
@@ -64,7 +67,6 @@
         </div>
       </div>
     </div>
-    <div class="col-md-2"></div>
   </div>
 </template>
 
@@ -195,6 +197,9 @@ export default {
   position: relative;
 }
 @media (max-width: 768px) {
+  .servicios_cardParent {
+    margin-top: 5em;
+  }
   .service_icon {
     height: 200px;
     border-radius: 100%;
@@ -203,6 +208,9 @@ export default {
     top: -92px;
     padding: 104px;
     z-index: -1;
+    width: 200px !important;
+    left: 50%;
+    transform: translateX(-50%);
   }
   #servicios {
     padding-top: 2em;

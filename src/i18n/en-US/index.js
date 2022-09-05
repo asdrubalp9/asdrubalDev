@@ -18,7 +18,7 @@ export default {
   i: "I'm",
   in: "in",
   aboutMeText1:
-    "Hello! My name is Hasdrubal. I am a software developer very passionate and dedicated to my work.",
+    "Hello! My name is Asdrubal. I am a software developer very passionate and dedicated to my work.",
   aboutMeText2:
     "With almost 10 years of experience as a developer I have acquired the necessary skills and knowledge to help you succeed with your project.",
   aboutMeText3:
@@ -35,6 +35,7 @@ export default {
   yourEmail: "Your email",
   yourPhone: "Your phone",
   yourMessage: "Your message",
+  nameRequired: "Name is required",
   obligatoryField: "This field is obligatory",
   fieldTooLong: "The field is too long",
   sendMessage: "Send message",

@@ -1,6 +1,6 @@
 <template>
   <div class="row bg-darker flex justify-center q-pa-xl" id="contactame">
-    <div class="col-12 col-md-8">
+    <div class="col-12 col-md-11 col-lg-8">
       <div class="row justify-around">
         <div class="col-12">
           <p class="text-center text-primary text-h5 q-ma-none">
@@ -33,14 +33,16 @@
           </div>
         </div>
         <div class="col-md-6 col-12">
-          <q-form ref="contactForm">
+          <q-form ref="contactForm" @submit.prevent="recaptcha()">
             <form-field-generator :fields="form" />
             <q-btn
+              :loading="loading"
               color="primary"
               icon-right="fa-solid fa-paper-plane"
               :label="t('sendMessage')"
               unelevated
               class="full-width q-mt-lg q-pa-md"
+              type="submit"
             />
           </q-form>
         </div>
@@ -53,8 +55,10 @@
 import { isValidEmail } from "./../composables/isValidEmail.js";
 import { ref, computed } from "vue";
 import { doConfetti } from "./../composables/confettiFn.js";
+import { VueReCaptcha, useReCaptcha } from "vue-recaptcha-v3";
 import FormFieldGenerator from "src/components/FormFieldGenerator.vue";
 import { useI18n } from "vue-i18n";
+import axios from "axios";
 export default {
   components: {
     FormFieldGenerator,
@@ -62,19 +66,28 @@ export default {
   setup() {
     const { t } = useI18n();
     const contactForm = ref(null);
+    const loading = ref(null);
     const form = ref([
       {
         type: "text",
+        name: "name",
         label: computed(() => t("yourName")),
         icon: "fa-solid fa-circle-xmark",
-        value: null,
-        rules: [(val) => !!val || "Precio es requerido"],
+        clearIcon: "fa-solid fa-times",
+        cancelIcon: "fa-solid fa-times",
+        errorIcon: "fa-solid fa-triangle-exclamation",
+        value: ref(""),
+        rules: [(val) => !!val || computed(() => t("nameRequired"))],
       },
       {
         type: "email",
+        name: "email",
         label: computed(() => t("yourEmail")),
         icon: "fa-solid fa-circle-xmark",
-        value: null,
+        clearIcon: "fa-solid fa-times",
+        cancelIcon: "fa-solid fa-times",
+        errorIcon: "fa-solid fa-triangle-exclamation",
+        value: ref(""),
         rules: [
           (val) =>
             (val !== null && val !== "") ||
@@ -84,16 +97,24 @@ export default {
       },
       {
         type: "text",
+        name: "phone",
         label: computed(() => t("yourPhone")),
         icon: "fa-solid fa-circle-xmark",
-        value: null,
+        clearIcon: "fa-solid fa-times",
+        cancelIcon: "fa-solid fa-times",
+        errorIcon: "fa-solid fa-triangle-exclamation",
+        value: ref(""),
         rules: [(val) => val.length > 20 || computed(() => t("fieldTooLong"))],
       },
       {
         type: "textarea",
+        name: "message",
         label: computed(() => t("yourMessage")),
         icon: "fa-solid fa-circle-xmark",
-        value: null,
+        clearIcon: "fa-solid fa-times",
+        cancelIcon: "fa-solid fa-times",
+        errorIcon: "fa-solid fa-triangle-exclamation",
+        value: ref(""),
         rules: [
           (val) =>
             (val !== null && val !== "") ||
@@ -101,10 +122,57 @@ export default {
         ],
       },
     ]);
+    const { executeRecaptcha, recaptchaLoaded } = useReCaptcha();
+
+    const recaptcha = () => {
+      const payload = {};
+      form.value.forEach((element) => {
+        payload[element.name] = element.value;
+      });
+
+      contactForm.value.validate().then(async (success) => {
+        if (success) {
+          await recaptchaLoaded();
+          const token = await executeRecaptcha("login");
+          loading.value = true;
+          console.log("token", token);
+
+          payload.token = token;
+          axios
+            .post(
+              "https://fx8d1yoh8j.execute-api.us-east-1.amazonaws.com",
+              //"https://273n15w3wl.execute-api.us-east-1.amazonaws.com/default/portafolioDruEmailSender",
+              payload,
+              {
+                headers: {
+                  "Access-Control-Allow-Origin": "*",
+                  Accept: "application/json",
+                  "Content-Type": "application/json",
+                },
+              }
+            )
+            .then((res) => {
+              console.log(res);
+              if (res.status === 200) {
+                doConfetti();
+                contactForm.value.reset();
+              }
+            })
+            .catch((err) => {
+              console.log(err);
+            })
+            .finally(() => {
+              loading.value = false;
+            });
+        }
+      });
+    };
 
     return {
       form,
       contactForm,
+      recaptcha,
+      loading,
       t,
     };
   },

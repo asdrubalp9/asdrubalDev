@@ -1,5 +1,5 @@
 <template>
-  <div :class="parallax ? 'preserve' : ''" class="tiltMe">
+  <div :class="`${parallax ? 'preserve' : ''} ${clases}`" class="tiltMe">
     <slot></slot>
   </div>
 </template>
@@ -19,6 +19,10 @@ export default {
     };
   },
   props: {
+    clases: {
+      type: String,
+      default: "",
+    },
     options: { type: Object, default: null },
     parallax: { type: Boolean, default: true },
   },

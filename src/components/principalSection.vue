@@ -1,5 +1,9 @@
 <template>
-  <div class="row flex flex-center" style="height: 92vh" id="home">
+  <div
+    class="row flex flex-center overflow-hidden"
+    style="height: 92vh"
+    id="home"
+  >
     <div class="col-1 column flex gt-md">
       <!--
         <q-icon
@@ -60,7 +64,7 @@
             :label="t('contactMe')"
             color="primary"
             unelevated
-            class="q-px-xl q-py-md text-weight-bold contactMeBtnHome"
+            class="q-px-xl self-center q-py-md text-weight-bold contactMeBtnHome"
             icon-right="fa-solid fa-paper-plane"
           />
         </div>
@@ -68,7 +72,7 @@
           <q-btn
             flat
             rounded
-            class="q-px-xl q-py-md text-weight-bold text-white aboutMeBtnHome"
+            class="q-px-xl self-center q-py-md text-weight-bold text-white aboutMeBtnHome"
             :label="t('aboutMe')"
             style="border: 1px solid white"
           />
@@ -89,7 +93,7 @@
     <div class="col-md-5 gt-sm full-height">
       <div class="row full-height">
         <div
-          class="col-12 parallaxHolder full-height"
+          class="col-12 parallaxHolder full-height position-relative"
           data-relative-input="true"
         >
           <div class="main">
@@ -98,9 +102,15 @@
               class="layer moveMe"
               data-direction="x"
               data-reverse="yes"
+              style="width: 63%"
             />
           </div>
-          <Tilt :parallax="false" :options="options">
+          <Tilt
+            clases="full-width full-height absolute"
+            :style="'top:0'"
+            :parallax="true"
+            :options="options"
+          >
             <div class="one">
               <div
                 class="in layer moveMe rounded-borders-lg"
@@ -109,7 +119,12 @@
               ></div>
             </div>
           </Tilt>
-          <Tilt :parallax="false" :options="options">
+          <Tilt
+            clases="full-width full-height absolute"
+            :style="'top:0'"
+            :parallax="true"
+            :options="options"
+          >
             <div class="two">
               <div
                 class="in layer moveMe rounded-borders-lg"
@@ -118,29 +133,31 @@
               ></div>
             </div>
           </Tilt>
-          <Tilt :parallax="false" :options="options">
+          <Tilt
+            clases="full-width full-height absolute"
+            :style="'top:0;'"
+            :parallax="true"
+            :options="options"
+          >
             <div class="three">
               <div
                 class="in layer moveMe"
-                data-direction="y"
+                data-direction="x"
                 data-reverse="no"
               ></div>
             </div>
           </Tilt>
-          <Tilt :parallax="false" :options="options"
+          <Tilt
+            clases="full-width full-height absolute"
+            :style="'top:0; z-index: 6'"
+            :parallax="true"
+            :options="options"
             ><div class="four">
               <div
                 class="in layer moveMe rounded-borders-lg"
-                data-direction="x"
+                data-direction="y"
                 data-reverse="yes"
-              ></div></div
-          ></Tilt>
-          <Tilt :parallax="false" :options="options"
-            ><div class="five">
-              <div
-                class="in layer moveMe rounded-borders-lg"
-                data-direction="x"
-                data-reverse="yes"
+                style="border: 7px solid white; background-color: transparent"
               ></div></div
           ></Tilt>
         </div>
@@ -171,12 +188,7 @@ export default {
       axis: null,
       reset: true,
       easing: "cubic-bezier(.03,.98,.52,.99)",
-      glare: true,
-      "max-glare": 1,
-      "glare-prerender": false,
-      // you need to add .js-tilt-glare>.js-tilt-glare-inner by yourself
-      "mouse-event-element": null,
-      // you need to add .js-tilt-glare>.js-tilt-glare-inner by yourself
+      glare: false,
       gyroscope: true,
       gyroscopeMinAngleX: -45,
       gyroscopeMaxAngleX: 45,
@@ -306,14 +318,18 @@ export default {
   position: absolute;
   right: 0px;
   bottom: -10px;
+  z-index: 2;
   width: 100%;
+}
+.one .in {
+  background: #ffffff;
 }
 .parallaxHolder .one {
   position: absolute;
   top: 150px;
-  bottom: 150px;
-  right: -55px;
-  width: 380px;
+  bottom: 208px;
+  right: 25%;
+  width: 354px;
   z-index: -4;
 }
 .parallaxHolder .two {
@@ -326,20 +342,20 @@ export default {
 }
 .parallaxHolder .three {
   position: absolute;
-  top: 235px;
-  left: -110px;
-  width: 80px;
-  height: 110px;
+  top: 340px;
+  left: 8%;
+  width: 200px;
+  height: 200px;
   z-index: 2;
 }
 .parallaxHolder .four {
   position: absolute;
-  width: 440px;
-  height: 470px;
-  top: 50%;
+  width: 306px;
+  height: 288px;
+  bottom: -13%;
   transform: translateY(-50%);
-  right: 20px;
-  z-index: -1;
+  left: 0;
+  z-index: 4;
 }
 .parallaxHolder .five {
   position: absolute;

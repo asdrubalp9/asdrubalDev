@@ -6,6 +6,9 @@
       </template>
       <template v-if="['date'].includes(form.type)">
         <q-input
+          :clear-icon="form.clearIcon"
+          :error-icon="form.errorIcon"
+          :cancel-icon="form.cancelIcon"
           clearable
           lazy-rules
           filled
@@ -78,6 +81,9 @@
                 </div>
                 <div class="col-4">
                   <q-input
+                    :clear-icon="form.clearIcon"
+                    :error-icon="form.errorIcon"
+                    :cancel-icon="form.cancelIcon"
                     clearable
                     lazy-rules
                     :rules="form.rules"
@@ -113,6 +119,9 @@
                 </div>
                 <div class="col-4">
                   <q-input
+                    :clear-icon="form.clearIcon"
+                    :error-icon="form.errorIcon"
+                    :cancel-icon="form.cancelIcon"
                     clearable
                     lazy-rules
                     :rules="form.rules"
@@ -158,6 +167,9 @@
       </template>
       <template v-if="['text', 'textarea', 'email'].includes(form.type)">
         <q-input
+          :clear-icon="form.clearIcon"
+          :error-icon="form.errorIcon"
+          :cancel-icon="form.cancelIcon"
           clearable
           lazy-rules
           :rules="form.rules"
@@ -177,6 +189,9 @@
       <template v-if="['toggle'].includes(form.type)"> </template>
       <template v-if="['password'].includes(form.type)">
         <q-input
+          :clear-icon="form.clearIcon"
+          :error-icon="form.errorIcon"
+          :cancel-icon="form.cancelIcon"
           v-model="form.value"
           filled
           dark
@@ -196,6 +211,9 @@
       </template>
       <template v-if="['number'].includes(form.type)">
         <q-input
+          :clear-icon="form.clearIcon"
+          :error-icon="form.errorIcon"
+          :cancel-icon="form.cancelIcon"
           clearable
           lazy-rules
           :rules="form.rules"

@@ -35,6 +35,7 @@ export default {
   yourEmail: "Tu correo",
   yourPhone: "Tu teléfono",
   yourMessage: "Tu mensaje",
+  nameRequired: "Tu nombre es requerido",
   obligatoryField: "Este campo es obligatorio",
   fieldTooLong: "El campo es muy largo",
   sendMessage: "Enviar mensaje",
