@@ -57,6 +57,12 @@ export default {
   },
   emit: ["toggleLang"],
   setup(props, context) {
+    const scrollPageTo = (navEl) => {
+      if (navEl) {
+        let element = document.querySelector(`${navEl}`);
+        if (element) element.scrollIntoView({ behavior: "smooth" });
+      }
+    };
     const { locale } = useI18n({ useScope: "global" });
     function toggleLang() {
       locale.value = locale.value === "en-US" ? "es" : "en-US";
@@ -64,6 +70,7 @@ export default {
     }
     return {
       toggleLang,
+      scrollPageTo,
     };
   },
 };
