@@ -66,6 +66,7 @@
             unelevated
             class="q-px-xl self-center q-py-md text-weight-bold contactMeBtnHome"
             icon-right="fa-solid fa-paper-plane"
+            @click="scrollPageTo('#contactame')"
           />
         </div>
         <div class="col-12 col-md-6 flex justify-center">
@@ -75,6 +76,7 @@
             class="q-px-xl self-center q-py-md text-weight-bold text-white aboutMeBtnHome"
             :label="t('aboutMe')"
             style="border: 1px solid white"
+            @click="scrollPageTo('#dru')"
           />
         </div>
       </div>
@@ -195,6 +197,12 @@ export default {
       gyroscopeMinAngleY: -45,
       gyroscopeMaxAngleY: 45, // This is the top limit of the device angle on Y axis, meaning that a device rotated at this angle would tilt the element as if the mouse was on the bottom border of the element;
     };
+    const scrollPageTo = (navEl) => {
+      if (navEl) {
+        let element = document.querySelector(`${navEl}`);
+        if (element) element.scrollIntoView({ behavior: "smooth" });
+      }
+    };
     const { locale } = useI18n({ useScope: "global" });
     const { t } = useI18n();
     const refSkills = ref(null);
@@ -285,6 +293,7 @@ export default {
       locale,
       skillsEN,
       options,
+      scrollPageTo,
     };
   },
 };

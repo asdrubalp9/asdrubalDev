@@ -167,7 +167,7 @@ export default {
         icon: "fa-solid fa-handshake-angle",
       },
     ]);
-    return { servicios, options, options2, t };
+    return { servicios, options, options2, t, scrollPageTo };
   },
   components: { Tilt },
 };

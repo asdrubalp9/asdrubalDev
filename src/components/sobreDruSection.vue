@@ -48,13 +48,15 @@
         {{ t("aboutMeText3") }}
       </p>
       <q-btn
-        color="primary"
+        color="primary q-mt-md"
         rounded
         icon-right="fa-solid fa-cloud-arrow-down"
         :label="t('headDownloadCV')"
         unelevated
         class="text-weight-bold aboutContactBtn"
         style="border: 2px solid white"
+        target="_blank"
+        :href="link"
       />
     </div>
     <div class="col-4 text-right self-end hidden"></div>
@@ -63,15 +65,20 @@
 
 <script>
 import { animateMovingElement } from "./../composables/movingEffect.js";
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 export default {
   setup() {
     const { t } = useI18n();
+    const link = computed(() => {
+      return `https://docs.google.com/presentation/d/${t(
+        "downloadCvLink"
+      )}/export/pdf`;
+    });
     onMounted(() => {
       animateMovingElement(".moveMe");
     });
-    return { t };
+    return { t, link };
   },
 };
 </script>
