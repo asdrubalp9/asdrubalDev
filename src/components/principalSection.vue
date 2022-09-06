@@ -173,6 +173,7 @@ import { onMounted, ref } from "vue";
 import { animateMovingElement } from "./../composables/movingEffect.js";
 import Tilt from "./tiltComponent.vue";
 import { useI18n } from "vue-i18n";
+import scrollPageTo from "src/composables/scrollPageTo.js";
 export default {
   components: {
     Tilt,
@@ -197,12 +198,7 @@ export default {
       gyroscopeMinAngleY: -45,
       gyroscopeMaxAngleY: 45, // This is the top limit of the device angle on Y axis, meaning that a device rotated at this angle would tilt the element as if the mouse was on the bottom border of the element;
     };
-    const scrollPageTo = (navEl) => {
-      if (navEl) {
-        let element = document.querySelector(`${navEl}`);
-        if (element) element.scrollIntoView({ behavior: "smooth" });
-      }
-    };
+
     const { locale } = useI18n({ useScope: "global" });
     const { t } = useI18n();
     const refSkills = ref(null);

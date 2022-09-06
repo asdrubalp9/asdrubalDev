@@ -72,6 +72,7 @@
 
 <script>
 import { ref, computed } from "vue";
+import scrollPageTo from "src/composables/scrollPageTo.js";
 //import TiltComponent from "./../components/tilt.vue";
 import Tilt from "./tiltComponent.vue";
 import { useI18n } from "vue-i18n";
@@ -129,12 +130,7 @@ export default {
       gyroscopeMinAngleY: -45,
       gyroscopeMaxAngleY: 45, // This is the top limit of the device angle on Y axis, meaning that a device rotated at this angle would tilt the element as if the mouse was on the bottom border of the element;
     };
-    const scrollPageTo = (navEl) => {
-      if (navEl) {
-        let element = document.querySelector(`${navEl}`);
-        if (element) element.scrollIntoView({ behavior: "smooth" });
-      }
-    };
+
     const servicios = ref([
       {
         nombre: computed(() => t("service1Title")),

@@ -47,6 +47,8 @@
 </template>
 
 <script>
+import scrollPageTo from "src/composables/scrollPageTo.js";
+
 import { useI18n } from "vue-i18n";
 export default {
   props: {
@@ -57,13 +59,6 @@ export default {
   },
   emit: ["toggleLang"],
   setup(props, context) {
-    const scrollPageTo = (navEl) => {
-      console.log("navel", navEl);
-      if (navEl) {
-        let element = document.querySelector(`${navEl}`);
-        if (element) element.scrollIntoView({ behavior: "smooth" });
-      }
-    };
     const { locale } = useI18n({ useScope: "global" });
     function toggleLang() {
       locale.value = locale.value === "en-US" ? "es" : "en-US";

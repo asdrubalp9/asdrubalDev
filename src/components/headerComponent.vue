@@ -31,7 +31,7 @@
 
 <script>
 import { onMounted, ref } from "vue";
-
+import scrollPageTo from "src/composables/scrollPageTo.js";
 import MenuIterator from "./menuIterator.vue";
 
 export default {
@@ -66,12 +66,6 @@ export default {
       });
     });
 
-    const scrollPageTo = (navEl) => {
-      if (navEl) {
-        let element = document.querySelector(`${navEl}`);
-        if (element) element.scrollIntoView({ behavior: "smooth" });
-      }
-    };
     const toggleMenu = () => {
       // refHead.value.$refs.menu.toggle();
     };
