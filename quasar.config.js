@@ -98,8 +98,8 @@ module.exports = configure(function (/* ctx */) {
       // directives: [],
 
       // Quasar plugins
-      plugins: [],
-      //plugins: ["gtmPlugin"],
+      // plugins: [],
+      // plugins: ["gtmPlugin"],
     },
 
     // animations: 'all', // --- includes all animations

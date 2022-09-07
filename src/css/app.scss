@@ -17,6 +17,7 @@ $main-background-color: #3c3c3c;
 }
 .primary-text {
   font-family: "Josefin Sans", sans-serif;
+  font-display: swap;
 }
 body {
   background: $main-background-color;
@@ -24,6 +25,7 @@ body {
   font-size: 1em;
   line-height: 1.8em;
   font-family: "Open Sans", sans-serif;
+  font-display: swap;
 }
 .primary-color {
   color: $primaryColor !important;
