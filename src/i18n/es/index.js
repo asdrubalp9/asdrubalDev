@@ -1,4 +1,6 @@
 export default {
+  captchaError: "Error de captcha",
+  messageSent: "Mensaje enviado",
   hi: "Hola",
   iAm: "soy",
   failed: "Acción fallida",

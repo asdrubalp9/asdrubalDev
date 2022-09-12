@@ -59,6 +59,7 @@ import { VueReCaptcha, useReCaptcha } from "vue-recaptcha-v3";
 import FormFieldGenerator from "src/components/FormFieldGenerator.vue";
 import { useI18n } from "vue-i18n";
 import axios from "axios";
+import { Notify } from "quasar";
 export default {
   components: {
     FormFieldGenerator,
@@ -154,10 +155,24 @@ export default {
               console.log(res);
               if (res.status === 200) {
                 doConfetti();
+                Notify.create({
+                  message: t("messageSent"),
+                  color: "positive",
+                  position: "center",
+                });
                 contactForm.value.reset();
               }
             })
             .catch((err) => {
+              let messageNotSent = "messageNotSent";
+              if (err.response.status === 403) {
+                messageNotSent = "captchaError";
+              }
+              Notify.create({
+                message: t(errorMsg),
+                color: "negative",
+                position: "center",
+              });
               console.log(err);
             })
             .finally(() => {
