@@ -213,7 +213,8 @@ export default {
 }
 i.q-icon.text-negative.notranslate.material-icons:before {
   content: "\f00d";
-  font-family: "FontAwesome";
+  font-family: "Font Awesome 6 Free";
+  font-weight: bold;
 }
 i.q-icon.text-negative.notranslate.material-icons {
   content: "";
