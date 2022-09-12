@@ -211,4 +211,14 @@ export default {
     height: unset;
   }
 }
+i.q-icon.text-negative.notranslate.material-icons:before {
+  content: "\f00d";
+  font-family: "FontAwesome";
+}
+i.q-icon.text-negative.notranslate.material-icons {
+  content: "";
+  text-indent: 100%;
+  overflow: hidden;
+  padding-left: 20px;
+}
 </style>
