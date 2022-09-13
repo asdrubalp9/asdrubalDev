@@ -161,8 +161,10 @@ export default {
               }
             })
             .catch((err) => {
-              console.log(err, err.response);
               let messageNotSent = "messageNotSent";
+              if (err.response.status === 501) {
+                messageNotSent = "emailMissing";
+              }
               if (err.response.status === 403) {
                 messageNotSent = "captchaError";
               }
