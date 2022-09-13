@@ -161,16 +161,16 @@ export default {
               }
             })
             .catch((err) => {
+              console.log(err, err.response);
               let messageNotSent = "messageNotSent";
               if (err.response.status === 403) {
                 messageNotSent = "captchaError";
               }
               Notify.create({
-                message: t(errorMsg),
+                message: t(messageNotSent),
                 color: "negative",
                 position: "center",
               });
-              console.log(err);
             })
             .finally(() => {
               loading.value = false;
