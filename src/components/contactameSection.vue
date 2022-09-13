@@ -140,7 +140,7 @@ export default {
           axios
             .post(
               "https://1cbycl999h.execute-api.us-east-1.amazonaws.com/DEV",
-              JSON.stringify(payload),
+              payload,
               {
                 headers: {
                   Accept: "application/json",
