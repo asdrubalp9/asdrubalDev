@@ -136,8 +136,6 @@ export default {
           await recaptchaLoaded();
           const token = await executeRecaptcha("login");
           loading.value = true;
-          console.log("token", token);
-
           payload.token = token;
           axios
             .post(
@@ -145,7 +143,6 @@ export default {
               payload,
               {
                 headers: {
-                  "Access-Control-Allow-Origin": "*",
                   Accept: "application/json",
                   "Content-Type": "application/json",
                 },
