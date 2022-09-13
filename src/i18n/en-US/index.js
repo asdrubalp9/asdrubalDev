@@ -1,4 +1,5 @@
 export default {
+  messageSent: "Message sent, I'll be in contact soon",
   emailMissing: "Please enter your email",
   captchaError: "Captcha error, prove you are not a robot",
   messageNotSent: "Message not sent, please try again later",

@@ -1,7 +1,7 @@
 export default {
   emailMissing: "Por favor, ingrese su correo electrónico",
   captchaError: "Error de captcha",
-  messageSent: "Mensaje enviado",
+  messageSent: "Mensaje enviado, pronto me pondre en contacto con usted",
   hi: "Hola",
   iAm: "soy",
   failed: "Acción fallida",
