@@ -14,7 +14,10 @@
           class="block q-mt-md"
         />
       </div>
-      <MenuIterator :options="topNavMenu" />
+      <MenuIterator
+        :options="topNavMenu"
+        @updateLeftDrawerOpen="doScrollToPageAndToggleMenu"
+      />
     </q-drawer>
     <q-page-container>
       <router-view />
@@ -81,7 +84,17 @@ export default defineComponent({
         style: "border: 4px solid #ea4747",
       },
     ]);
+
+    function doScrollToPageAndToggleMenu(navEl) {
+      leftDrawerOpen.value = false;
+      setTimeout(() => {
+        let element = document.querySelector(`${navEl}`);
+        if (element) element.scrollIntoView({ behavior: "smooth" });
+      }, 200);
+    }
+
     return {
+      doScrollToPageAndToggleMenu,
       topNavMenu,
       leftDrawerOpen,
       drawerToggleLang(val = null) {

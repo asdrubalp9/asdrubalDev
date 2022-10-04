@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import scrollPageTo from "src/composables/scrollPageTo.js";
+// import scrollPageTo from "src/composables/scrollPageTo.js";
 
 import { useI18n } from "vue-i18n";
 export default {
@@ -57,13 +57,20 @@ export default {
       default: () => [],
     },
   },
-  emit: ["toggleLang"],
-  setup(props, context) {
+  emits: ["toggleLang", "updateLeftDrawerOpen"],
+  setup(props, { emit }) {
     const { locale } = useI18n({ useScope: "global" });
     function toggleLang() {
       locale.value = locale.value === "en-US" ? "es" : "en-US";
-      context.emit("toggleLang", "inDrawer");
+      emit("toggleLang", "inDrawer");
     }
+    function scrollPageTo(navEl) {
+      if (navEl) {
+        emit("updateLeftDrawerOpen", navEl);
+        // gtm.logPage(navEl);
+      }
+    }
+
     return {
       toggleLang,
       scrollPageTo,

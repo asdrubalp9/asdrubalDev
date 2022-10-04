@@ -14,7 +14,10 @@
       </q-toolbar-title>
       <q-space />
       <div class="gt-md">
-        <MenuIterator :options="topNavMenu" />
+        <MenuIterator
+          :options="topNavMenu"
+          @updateLeftDrawerOpen="doScrollToPageAndToggleMenu"
+        />
       </div>
       <q-btn
         flat
@@ -66,6 +69,11 @@ export default {
       });
     });
 
+    function doScrollToPageAndToggleMenu(navEl) {
+      let element = document.querySelector(`${navEl}`);
+      if (element) element.scrollIntoView({ behavior: "smooth" });
+    }
+
     const toggleMenu = () => {
       // refHead.value.$refs.menu.toggle();
     };
@@ -76,6 +84,7 @@ export default {
       scrollPageTo,
       toolbarTitleClass,
       toggleMenu,
+      doScrollToPageAndToggleMenu,
     };
   },
   components: { MenuIterator },
