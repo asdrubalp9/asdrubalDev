@@ -33,7 +33,7 @@
           </div>
         </div>
         <div class="col-md-6 col-12">
-          <q-form ref="contactForm" @submit.prevent="recaptcha()">
+          <q-form @submit.prevent="recaptcha()" ref="contactForm">
             <form-field-generator :fields="form" />
             <q-btn
               :loading="loading"
@@ -53,7 +53,7 @@
 
 <script>
 import { isValidEmail } from "./../composables/isValidEmail.js";
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
 import { doConfetti } from "./../composables/confettiFn.js";
 import { VueReCaptcha, useReCaptcha } from "vue-recaptcha-v3";
 import FormFieldGenerator from "src/components/FormFieldGenerator.vue";
@@ -65,12 +65,35 @@ export default {
     FormFieldGenerator,
   },
   setup() {
-    const { t } = useI18n();
+    const { t, locale } = useI18n();
     const contactForm = ref(null);
     const loading = ref(null);
+    //const obligatoryField = computed(() => t("obligatoryField"));
+    //const fieldTooLong = computed(() => t("fieldTooLong"));
+    //const fieldTooShort = computed(() => t("fieldTooShort"));
+    const obligatoryField = ref("This field is required");
+    const fieldTooLong = ref("This field is too long");
+    const fieldTooShort = ref("this field is too short");
+
+    watch(
+      () => locale,
+      (newLocale) => {
+        if (locale.value !== "es") {
+          obligatoryField.value = "Este campo es obligatorio";
+          fieldTooLong.value = "Este campo es demasiado largo";
+          fieldTooShort.value = "Este campo es demasiado corto";
+        }
+      },
+      {
+        deep: true,
+      }
+    );
+
     const form = ref([
       {
         type: "text",
+
+        errorMessage: ref(null),
         name: "name",
         label: computed(() => t("yourName")),
         icon: "fa-solid fa-circle-xmark",
@@ -78,26 +101,30 @@ export default {
         cancelIcon: "fa-solid fa-times",
         errorIcon: "fa-solid fa-triangle-exclamation",
         value: ref(""),
-        rules: [(val) => !!val || computed(() => t("nameRequired"))],
+        rules: [(val) => !!val || obligatoryField],
       },
       {
         type: "email",
+
+        errorMessage: ref(null),
         name: "email",
         label: computed(() => t("yourEmail")),
         icon: "fa-solid fa-circle-xmark",
         clearIcon: "fa-solid fa-times",
         cancelIcon: "fa-solid fa-times",
         errorIcon: "fa-solid fa-triangle-exclamation",
-        value: ref(""),
+        value: ref("asd@asd.com"),
         rules: [
-          (val) =>
-            (val !== null && val !== "") ||
-            computed(() => t("obligatoryField")),
+          (val) => {
+            return !val ? obligatoryField : true;
+          },
           isValidEmail,
         ],
       },
       {
         type: "text",
+
+        errorMessage: ref(null),
         name: "phone",
         label: computed(() => t("yourPhone")),
         icon: "fa-solid fa-circle-xmark",
@@ -105,10 +132,16 @@ export default {
         cancelIcon: "fa-solid fa-times",
         errorIcon: "fa-solid fa-triangle-exclamation",
         value: ref(""),
-        rules: [(val) => val.length > 20 || computed(() => t("fieldTooLong"))],
+        rules: [
+          (val) => {
+            return val.length > 20 ? fieldTooLong : true;
+          },
+        ],
       },
       {
         type: "textarea",
+
+        errorMessage: ref(null),
         name: "message",
         label: computed(() => t("yourMessage")),
         icon: "fa-solid fa-circle-xmark",
@@ -117,9 +150,13 @@ export default {
         errorIcon: "fa-solid fa-triangle-exclamation",
         value: ref(""),
         rules: [
-          (val) =>
-            (val !== null && val !== "") ||
-            computed(() => t("obligatoryField")),
+          (val) => {
+            return val.length > 1000 ? fieldTooLong : true;
+          },
+          (val) => {
+            return val.length < 5 ? fieldTooShort : true;
+          },
+          ,
         ],
       },
     ]);
@@ -132,6 +169,27 @@ export default {
       });
 
       contactForm.value.validate().then(async (success) => {
+        let message = "";
+        form.value.forEach((field) => {
+          field.rules.forEach((rule) => {
+            if (rule(field.value).value !== true) {
+              field.isValid = false;
+              field.errorMessage = rule(field.value).value;
+              message += rule(field.value).value + "<br>";
+            } else {
+              message += "";
+              field.isValid = true;
+              field.errorMessage = "";
+            }
+          });
+        });
+        form.value.forEach((field) => {
+          if (field.errorMessage) {
+            success = false;
+          } else {
+            success = true;
+          }
+        });
         if (success) {
           await recaptchaLoaded();
           const token = await executeRecaptcha("login");
@@ -149,7 +207,6 @@ export default {
               }
             )
             .then((res) => {
-              console.log(res);
               if (res.status === 200) {
                 doConfetti();
                 Notify.create({

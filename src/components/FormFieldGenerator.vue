@@ -137,6 +137,9 @@
             </q-item-label>
           </q-item-section>
         </q-item>
+        <p class="text-negative" v-show="form.errorMessage">
+          {{ form.errorMessage }}
+        </p>
       </template>
       <template v-if="['select'].includes(form.type)">
         <q-select
@@ -149,6 +152,9 @@
           :label="`${form.label} ${form.required ? '*' : ''}`"
           @update:model-value="form.func"
         />
+        <p class="text-negative" v-show="form.errorMessage">
+          {{ form.errorMessage }}
+        </p>
       </template>
       <template v-if="['checkbox'].includes(form.type)">
         <q-checkbox
@@ -164,6 +170,9 @@
           :hint="form.hint"
           :class="form.class"
         />
+        <p class="text-negative" v-show="form.errorMessage">
+          {{ form.errorMessage }}
+        </p>
       </template>
       <template v-if="['text', 'textarea', 'email'].includes(form.type)">
         <q-input
@@ -172,7 +181,8 @@
           :cancel-icon="form.cancelIcon"
           clearable
           lazy-rules
-          :rules="form.rules"
+          :error-message="form.errorMessage"
+          :error="form.isValid"
           filled
           dark
           :mask="form.mask"
@@ -184,9 +194,13 @@
           class="q-mt-sm full-width"
           :icon="form.icon"
           :class="form.class"
-        />
+        >
+          <template #error> </template>
+        </q-input>
+        <p class="text-negative" v-show="form.errorMessage">
+          {{ form.errorMessage }}
+        </p>
       </template>
-      <template v-if="['toggle'].includes(form.type)"> </template>
       <template v-if="['password'].includes(form.type)">
         <q-input
           :clear-icon="form.clearIcon"
@@ -208,6 +222,9 @@
             />
           </template>
         </q-input>
+        <p class="text-negative" v-show="form.errorMessage">
+          {{ form.errorMessage }}
+        </p>
       </template>
       <template v-if="['number'].includes(form.type)">
         <q-input
@@ -229,6 +246,9 @@
           :mask="form.mask"
           :class="form.class"
         />
+        <p class="text-negative" v-show="form.errorMessage">
+          {{ form.errorMessage }}
+        </p>
       </template>
     </template>
   </template>

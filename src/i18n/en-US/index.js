@@ -42,6 +42,7 @@ export default {
   nameRequired: "Name is required",
   obligatoryField: "This field is obligatory",
   fieldTooLong: "The field is too long",
+  fieldTooShort: "The field is too short",
   sendMessage: "Send message",
   service1Title: "Software development",
   service1Desc:
