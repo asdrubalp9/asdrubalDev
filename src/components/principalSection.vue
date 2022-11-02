@@ -100,11 +100,11 @@
         >
           <div class="main">
             <img
-              src="imgs/dru.png"
+              src="imgs/druportrait.png"
               class="layer moveMe"
               data-direction="x"
               data-reverse="yes"
-              style="width: 63%"
+              style="width: 93%"
             />
           </div>
           <Tilt

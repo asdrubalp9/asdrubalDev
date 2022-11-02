@@ -12,7 +12,8 @@
             class="moveMe"
             data-direction="y"
             data-reverse="yes"
-            src="imgs/dru.png"
+            style="width: 420px; margin-top: -70px"
+            src="imgs/frontportrait.png"
           />
         </div>
         <div class="parentBox">
