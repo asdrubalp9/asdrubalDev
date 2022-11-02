@@ -191,7 +191,6 @@ export default {
 
         form.value.forEach((field) => {
           if (field.errorMessage) {
-            console.log("success", field.errorMessage);
             success = false;
           }
         });
