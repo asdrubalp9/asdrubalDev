@@ -113,10 +113,10 @@ export default {
         clearIcon: "fa-solid fa-times",
         cancelIcon: "fa-solid fa-times",
         errorIcon: "fa-solid fa-triangle-exclamation",
-        value: ref("asd@asd.com"),
+        value: "",
         rules: [
           (val) => {
-            return !val ? obligatoryField : true;
+            return !!val ? obligatoryField : true;
           },
           isValidEmail,
         ],
