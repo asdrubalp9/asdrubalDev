@@ -197,7 +197,8 @@ export default {
           payload.token = token;
           axios
             .post(
-              "https://1cbycl999h.execute-api.us-east-1.amazonaws.com/DEV",
+              //"https://1cbycl999h.execute-api.us-east-1.amazonaws.com/DEV",
+              " https://q7bjp08yj8.execute-api.us-east-1.amazonaws.com/default/portfolioDruMailSenderSendgrid",
               payload,
               {
                 headers: {
