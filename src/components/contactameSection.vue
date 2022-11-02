@@ -73,7 +73,8 @@ export default {
     //const fieldTooShort = computed(() => t("fieldTooShort"));
     const obligatoryField = ref("This field is required");
     const fieldTooLong = ref("This field is too long");
-    const fieldTooShort = ref("this field is too short");
+    const fieldTooShort = ref("This field is too short");
+    const invalidEmail = ref("Invalid Email");
 
     watch(
       () => locale,
@@ -115,10 +116,15 @@ export default {
         errorIcon: "fa-solid fa-triangle-exclamation",
         value: "",
         rules: [
+          (val) => (!!val ? obligatoryField : true),
           (val) => {
-            return !!val ? obligatoryField : true;
+            const emailPattern =
+              /^(?=[a-zA-Z0-9@._%+-]{6,254}$)[a-zA-Z0-9._%+-]{1,64}@(?:[a-zA-Z0-9-]{1,63}\.){1,8}[a-zA-Z]{2,63}$/;
+            if (!val) {
+              return obligatoryField;
+            }
+            return emailPattern.test(val) || invalidEmail;
           },
-          isValidEmail,
         ],
       },
       {
