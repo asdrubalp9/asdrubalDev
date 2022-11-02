@@ -107,7 +107,6 @@ export default {
       },
       {
         type: "email",
-
         errorMessage: ref(null),
         name: "email",
         label: computed(() => t("yourEmail")),
@@ -130,7 +129,6 @@ export default {
       },
       {
         type: "text",
-
         errorMessage: ref(null),
         name: "phone",
         label: computed(() => t("yourPhone")),
@@ -147,7 +145,6 @@ export default {
       },
       {
         type: "textarea",
-
         errorMessage: ref(null),
         name: "message",
         label: computed(() => t("yourMessage")),
@@ -158,10 +155,10 @@ export default {
         value: ref(""),
         rules: [
           (val) => {
-            return val.length > 1000 ? fieldTooLong : true;
+            return val && val.length > 1000 ? fieldTooLong : true;
           },
           (val) => {
-            return val.length < 5 ? fieldTooShort : true;
+            return val && val.length < 5 ? fieldTooShort : true;
           },
           ,
         ],
@@ -177,6 +174,7 @@ export default {
 
       contactForm.value.validate().then(async (success) => {
         let message = "";
+        success = true;
         form.value.forEach((field) => {
           field.rules.forEach((rule) => {
             if (rule(field.value).value !== true) {
@@ -190,13 +188,14 @@ export default {
             }
           });
         });
+
         form.value.forEach((field) => {
           if (field.errorMessage) {
+            console.log("success", field.errorMessage);
             success = false;
-          } else {
-            success = true;
           }
         });
+
         if (success) {
           await recaptchaLoaded();
           const token = await executeRecaptcha("login");
@@ -241,6 +240,10 @@ export default {
             })
             .finally(() => {
               loading.value = false;
+              form.value.forEach((field) => {
+                field.errorMessage = "";
+                field.value = "";
+              });
             });
         }
       });
