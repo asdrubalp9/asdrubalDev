@@ -134,7 +134,7 @@ export default {
         value: ref(""),
         rules: [
           (val) => {
-            return val.length > 20 ? fieldTooLong : true;
+            return val && val.length > 20 ? fieldTooLong : true;
           },
         ],
       },
