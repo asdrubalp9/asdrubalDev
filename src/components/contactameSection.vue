@@ -79,10 +79,11 @@ export default {
     watch(
       () => locale,
       (newLocale) => {
-        if (locale.value !== "es") {
+        if (locale.value == "es") {
           obligatoryField.value = "Este campo es obligatorio";
           fieldTooLong.value = "Este campo es demasiado largo";
           fieldTooShort.value = "Este campo es demasiado corto";
+          invalidEmail.value = "El correo es inválido";
         }
       },
       {
